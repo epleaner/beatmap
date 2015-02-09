@@ -1,0 +1,62 @@
+<html>
+
+<head>
+    <title>
+        Beatmap
+    </title>
+
+    <meta name="description" content="A sweet way to find new jams">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="css/main.css" rel="stylesheet" />
+    <link href="css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/animate.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.2.0/css/font-awesome.min.css" /> -->
+    <link rel="stylesheet" type="text/css" href="css/hover.css" />
+    <link rel='shortcut icon' href='favicon.ico' />
+</head>
+
+<body>
+    <div class="container">
+        <div class="spacer20"></div>
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                <div id="sticky-menu-search" class="horizontal-center">
+                    <div class="input-group">
+                        <label for="search-input" class="sr-only text-center">Enter an artist</label>
+                        <input type="text" class="form-control" id="search-input" placeholder="Enter an artist">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" id="search-button" type="button">Search
+                                <!-- <span class="glyphicon glyphicon-search"  /> -->
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+        </div>
+        <div class="spacer20"></div>
+        <div id="main" class="grid">
+            <!-- <div class="row">
+                <div class="col-xs-4 col-xs-offset-4" id="loading-animation-wrapper">
+                    <img id="preloader-img" src="images/preloader_128x128.gif" />
+                </div>
+
+            </div> -->
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-4">
+                    <button hidden type="button" id="load-more" class="btn btn-default horizontal-center">Load More</button>
+                </div>
+            </div>
+        </div>
+        <div id="footer"></div>
+    </div>
+    <script data-main="js/common/config" src="js/thirdParty/require.js"></script>
+</body>
+
+</html>

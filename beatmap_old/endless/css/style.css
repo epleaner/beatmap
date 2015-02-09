@@ -1,0 +1,29 @@
+div {
+	display: block;
+}
+.infinite-item {
+	float: left;
+	width: 100px;
+	height: 100px;
+	margin: 20px 0 20px 20px;
+}
+
+.infinite-item:nth-child(3n) {
+	background-color: #bada55;
+}
+.infinite-item:nth-child(3n+1) {
+	background-color: #badcab;
+}
+.infinite-item:nth-child(3n+2) {
+	background-color: #caba55;
+}
+.infinite-container {
+	width: 400px;
+	border: 2px solid black;
+	overflow:hidden;
+    position:relative;
+}
+
+.infinite-more-link {
+	visibility: hidden;
+}
