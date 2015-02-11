@@ -14,10 +14,6 @@
 					var searchView = new Searchview();
 					expect( searchView ).to.be.an.instanceof( Searchview );
 				});
-
-				it('should have more test written', function(){
-					expect( false ).to.be.ok;
-				});
 			});
 
 		});
