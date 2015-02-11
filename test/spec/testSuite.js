@@ -5,6 +5,7 @@ define(function() {
 	return {
 		specs: ['spec/exampleTest.js',
 		'spec/models/album.js',
+		'spec/views/item/albumView.js',
 		'spec/views/item/searchView.js',
 		'spec/views/layout/root-layout.js'
 		]
