@@ -14,10 +14,6 @@
 					var root-layout = new RootLayout();
 					expect( root-layout ).to.be.an.instanceof( RootLayout );
 				});
-
-				it('should have more test written', function(){
-					expect( false ).to.be.ok;
-				});
 			});
 
 		});
