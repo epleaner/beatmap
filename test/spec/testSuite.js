@@ -3,7 +3,9 @@ define(function() {
 
 	/* return an array of specs to be run */
 	return {
-		specs: ['spec/exampleTest'
+		specs: ['spec/exampleTest.js',
+		'spec/views/item/searchView.js',
+		'spec/views/layout/root-layout.js'
 		]
 	};
 });
