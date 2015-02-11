@@ -30,12 +30,12 @@ define([
             events: {},
 
             onBeforeRender: function() {
-            	console.log('on before render');
+            	console.log('on before render root layout');
             },
 
             /* on render callback */
             onRender: function() {
-                console.log('renderng a root layout');
+                console.log('rendering a root layout');
             	this._showRegionViews();
             	this._setupAppVents();
             },

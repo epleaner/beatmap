@@ -1,4 +1,6 @@
+@import "normalize.css";
 @import "sass-bootstrap/lib/bootstrap";
+@import "hover.css";
 
 /* Space out content a bit */
 
@@ -7,7 +9,6 @@ body {
     padding-bottom: 20px;
     // font-family: 'Lato', 'Merriweather', serif;
 }
-/* Everything but the jumbotron gets side spacing for mobile first views */
 
 .header, .footer {
     padding-left: 15px;
