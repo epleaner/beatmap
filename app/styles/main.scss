@@ -1,6 +1,40 @@
-@import 'sass-bootstrap/lib/bootstrap';
+@import "sass-bootstrap/lib/bootstrap";
 
-.hero-unit {
-    margin: 50px auto 0 auto;
-    width: 400px;
+/* Space out content a bit */
+
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    // font-family: 'Lato', 'Merriweather', serif;
 }
+/* Everything but the jumbotron gets side spacing for mobile first views */
+
+.header, .footer {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+/* Custom page header */
+
+.header {
+    h1 {
+        font-size: 3em;
+    }
+    border-bottom: 1px solid #e5e5e5;
+    background-color: rgba(51, 122, 183, 0.35);
+}
+/* Custom page footer */
+
+.footer {
+    p {
+        text-align: right;
+    }
+    padding-top: 19px;
+    background-color: #ffffff;
+    color: #777;
+    border-top: 1px solid #e5e5e5;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+}
+
