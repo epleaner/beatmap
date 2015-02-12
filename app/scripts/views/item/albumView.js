@@ -27,7 +27,9 @@ function( Backbone, AlbumViewTmpl  ) {
         },
 
 		/* on render callback */
-		onRender: function() {}
+		onRender: function() {
+			
+		}
 	});
 
 });
