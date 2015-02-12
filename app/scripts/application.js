@@ -13,7 +13,8 @@ define([
             Communicator.mediator.trigger('APP:START');
 
             if (options && options.rootLayout) {
-                options.rootLayout.render();
+                this.rootLayout = options.rootLayout;
+                this.rootLayout.render();
             }
         });
 
