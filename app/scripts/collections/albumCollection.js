@@ -22,10 +22,9 @@ define([
             },
 
             fetch: function() {
-                var $query = $.extend({}, this._query, {
-                    artist: this._baseArtist.get('name')
-                });
-                return Backbone.Collection.prototype.fetch.call(this, {data: $query});
+                var query = this._makeFetchQuery();
+
+                return Backbone.Collection.prototype.fetch.call(this, {data: query});
             },
 
             parse: function(response) {
@@ -46,6 +45,12 @@ define([
 
             _setBaseArtist: function() {
                 this._baseArtist = this.options.artist;
+            },
+
+            _makeFetchQuery: function() {
+                return $.extend({}, this._query, {
+                    artist: this._baseArtist.get('name')
+                });
             }
 
         });
