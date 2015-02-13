@@ -7,5 +7,7 @@ require([
     function(Backbone, App, RegionManager, RootLayout) {
         'use strict';
 
-        App.start({rootLayout: new RootLayout()});
+        App.start({
+            rootLayout: new RootLayout()
+        });
     });

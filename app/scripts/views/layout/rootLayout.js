@@ -36,19 +36,24 @@ define([
             /* on render callback */
             onRender: function() {
                 console.log('rendering a root layout');
+
             	this._showRegionViews();
             	this._setupAppVents();
+            },
+
+            _showRegionViews: function() {
+                this._showSearchBar();
             },
 
             /* Private methods */
             _setupAppVents: function() {
             	App.vent.on('searchBar:search', this._showLoadingSearchView);
             },
-
-            _showRegionViews: function() {
-            	this.getRegion('searchBar').show(new SearchBarView());
+            
+            _showSearchBar: function() {
+                this.getRegion('searchBar').show(new SearchBarView());
             },
-
+            
             _showLoadingSearchView: function(searchVal) {
             	console.log('searching for', searchVal);
             }
