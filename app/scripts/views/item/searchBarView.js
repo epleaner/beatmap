@@ -1,9 +1,7 @@
 define([
-        'backbone',
-        'application',
         'hbs!tmpl/item/searchBarView_tmpl'
     ],
-    function(Backbone, App, SearchBarViewTmpl) {
+    function(SearchBarViewTmpl) {
         'use strict';
 
         /* Return a ItemView class definition */
@@ -35,9 +33,9 @@ define([
             _triggerSearch: function() {
             	var searchVal = this.ui.searchInput.val();
                 if(searchVal !== '') {
-                    App.vent.trigger('searchBar:search', searchVal);
+                    Beatmap.channels.searchBar.vent.trigger('search', searchVal);
                 } else {
-                    App.vent.trigger('searchBar:badSearch', searchVal);
+                    Beatmap.channels.searchBar.vent.trigger('badSearch', searchVal);
                 }
             }
         });

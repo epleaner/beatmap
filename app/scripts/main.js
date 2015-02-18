@@ -1,13 +1,16 @@
 require([
-        'backbone',
-        'application',
-        'regionManager',
-        'views/layout/rootLayout'
+        'common/requireConfig'
+        // 'backbone',
+        // 'application',
+        // 'regionManager',
+        // 'views/layout/rootLayout'
     ],
-    function(Backbone, App, RegionManager, RootLayout) {
+    function(){//Backbone, App, RegionManager, RootLayout) {
         'use strict';
 
-        App.start({
-            rootLayout: new RootLayout()
-        });
+        require(['plugins']);
+
+        // App.start({
+            // rootLayout: new RootLayout()
+        // });
     });
