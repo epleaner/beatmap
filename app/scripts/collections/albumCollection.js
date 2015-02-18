@@ -1,6 +1,6 @@
 define([
         'backbone',
-        'model/album'
+        'models/album'
     ],
     function(Backbone, Album) {
         'use strict';
@@ -11,20 +11,25 @@ define([
 
             model: Album,
 
-            //	No sorting
+            //  No sorting
             comparator: false,
 
             initialize: function(options) {
                 console.log('initialize a Albumcollection collection');
-                
+
                 this.options = options || {};
-                this._setBaseArtist();
+
+                if (this.options.artist) {
+                    this._setBaseArtist();
+                }
             },
 
             fetch: function() {
                 var query = this._makeFetchQuery();
 
-                return Backbone.Collection.prototype.fetch.call(this, {data: query});
+                return Backbone.Collection.prototype.fetch.call(this, {
+                    data: query
+                });
             },
 
             parse: function(response) {
@@ -55,5 +60,3 @@ define([
 
         });
     });
-
-        

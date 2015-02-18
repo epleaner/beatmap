@@ -34,7 +34,11 @@ define([
 
             _triggerSearch: function() {
             	var searchVal = this.ui.searchInput.val();
-            	App.vent.trigger('searchBar:search', searchVal);
+                if(searchVal !== '') {
+                    App.vent.trigger('searchBar:search', searchVal);
+                } else {
+                    App.vent.trigger('searchBar:badSearch', searchVal);
+                }
             }
         });
 

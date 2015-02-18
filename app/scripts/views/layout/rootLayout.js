@@ -2,9 +2,10 @@ define([
         'backbone',
         'application',
         'views/item/searchBarView',
+        'views/collection/AlbumGridView',
         'hbs!tmpl/layout/rootLayout_tmpl'
     ],
-    function(Backbone, App, SearchBarView, RootLayoutTmpl) {
+    function(Backbone, App, SearchBarView, AlbumGridView, RootLayoutTmpl) {
         'use strict';
 
         /* Return a Layout class definition */
@@ -20,7 +21,8 @@ define([
 
             /* Layout sub regions */
             regions: {
-            	searchBar: '#search-bar-region'
+            	searchBar: '#search-bar-region',
+                resultsGrid: '.results-grid-region'
             },
 
             /* ui selector cache */
@@ -38,25 +40,36 @@ define([
                 console.log('rendering a root layout');
 
             	this._showRegionViews();
-            	this._setupAppVents();
+            	this._setupAppVentListeners();
             },
 
             _showRegionViews: function() {
                 this._showSearchBar();
+                this._showResultsGrid();
             },
 
             /* Private methods */
-            _setupAppVents: function() {
-            	App.vent.on('searchBar:search', this._showLoadingSearchView);
+            _setupAppVentListeners: function() {
+                App.vent.on('searchBar:search', this._showSearchingView.bind(this));
+            	App.vent.on('searchBar:badSearch', this._showBadSearchView.bind(this));
             },
             
             _showSearchBar: function() {
                 this.getRegion('searchBar').show(new SearchBarView());
             },
+
+            _showResultsGrid: function() {
+                this.getRegion('resultsGrid').show(new AlbumGridView());
+            },
             
-            _showLoadingSearchView: function(searchVal) {
+            _showSearchingView: function(searchVal) {
             	console.log('searching for', searchVal);
+            },
+
+            _showBadSearchView: function(searchVal) {
+                console.log('bad search val', searchVal);
             }
         });
 
     });
+
