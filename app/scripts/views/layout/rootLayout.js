@@ -1,12 +1,9 @@
-define([
-        'backbone',
-        'application',
-        'views/item/searchBarView',
-        'views/collection/AlbumGridView',
-        'hbs!tmpl/layout/rootLayout_tmpl'
-    ],
-    function(Backbone, App, SearchBarView, AlbumGridView, RootLayoutTmpl) {
+define(function(require) {
         'use strict';
+
+        var SearchBarView = require('views/item/searchBarView');
+        var AlbumGridView = require('views/collection/AlbumGridView');
+        var RootLayoutTmpl = require('hbs!tmpl/layout/rootLayout_tmpl');
 
         /* Return a Layout class definition */
         return Backbone.Marionette.LayoutView.extend({
@@ -17,7 +14,7 @@ define([
 
             template: RootLayoutTmpl,
 
-            el: 'body',
+            // el: 'body',
 
             /* Layout sub regions */
             regions: {
@@ -50,8 +47,8 @@ define([
 
             /* Private methods */
             _setupAppVentListeners: function() {
-                App.vent.on('searchBar:search', this._showSearchingView.bind(this));
-            	App.vent.on('searchBar:badSearch', this._showBadSearchView.bind(this));
+                Beatmap.channels.searchBar.vent.on('search', this._showSearchingView.bind(this));
+                Beatmap.channels.searchBar.vent.on('badSearch', this._showBadSearchView.bind(this));
             },
             
             _showSearchBar: function() {

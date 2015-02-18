@@ -1,9 +1,7 @@
 define([
-        'backbone',
-        'application',
         'collections/artistCollection'
     ],
-    function(Backbone, App, ArtistCollection) {
+    function(ArtistCollection) {
         'use strict';
 
         /* Return a model class definition */
@@ -26,7 +24,7 @@ define([
             },
 
             _setupAppVentListeners: function() {
-                App.vent.on('searchBar:search', this._artistSearch.bind(this));
+                Beatmap.channels.searchBar.vent.on('search', this._artistSearch.bind(this));
             },
 
             _artistSearch: function(artist) {

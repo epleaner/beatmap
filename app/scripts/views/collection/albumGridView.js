@@ -1,11 +1,9 @@
 define([
-        'backbone',
-        'application',
         'views/item/albumView',
         'models/albumGrid',
         'collections/albumCollection'
     ],
-    function(Backbone, App, AlbumView, AlbumGridModel, AlbumCollection) {
+    function(AlbumView, AlbumGridModel, AlbumCollection) {
         'use strict';
 
         /* Return a ItemView class definition */
@@ -62,7 +60,7 @@ define([
             /*	Private methods	*/
 
             _setupAppVentListeners: function() {
-            	App.vent.on('searchBar:search', this._startSearch.bind(this));
+                Beatmap.channels.searchBar.vent.on('search', this._startSearch.bind(this));
             },
 
             //  When a model has an album ready to be shown, add it to the collection

@@ -30,7 +30,7 @@ define([
 
             parse: function(response) {
                 if(response.error) {
-                    App.vent.trigger('artistCollection:responseError', response);
+                    Beatmap.channels.artistCollection.vent.trigger('responseError', response);
                     return [];
                 }
                 return response.similarartists.artist;
