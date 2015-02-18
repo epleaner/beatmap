@@ -1,14 +1,17 @@
 define([
         'backbone',
+        'application',
         'collections/artistCollection'
     ],
-    function(Backbone, ArtistCollection) {
+    function(Backbone, App, ArtistCollection) {
         'use strict';
 
         /* Return a model class definition */
         return Backbone.Model.extend({
             initialize: function() {
                 console.log("initialize a Albumgrid model");
+
+                this._setupAppVentListeners();
             },
 
             defaults: function() {
@@ -18,16 +21,26 @@ define([
 
                     _relatedArtists: undefined,
                     _availableArtists: undefined,
+                    _searchArtist: undefined
                 };
             },
 
-            artistSearch: function(params) {
-                this.set('_relatedArtists', new ArtistCollection(params));
+            _setupAppVentListeners: function() {
+                App.vent.on('searchBar:search', this._artistSearch.bind(this));
+            },
+
+            _artistSearch: function(artist) {
+                console.log("grid model searching for", artist);
+                this.set('_searchArtist', artist);
+
+                this.set('_relatedArtists', new ArtistCollection({
+                    artist: artist
+                }));
+
                 this.listenTo(this.get('_relatedArtists'), 'showAlbum', this._onShowAlbum.bind(this));
                 this.listenTo(this.get('_relatedArtists'), 'noAlbums', this._onArtistNoAlbums.bind(this));
 
-                var deferred = this.get('_relatedArtists').fetch();
-                deferred.done(this._onFetchRelatedArtists.bind(this));
+                this.get('_relatedArtists').fetch().done(this._onFetchRelatedArtists.bind(this));
             },
 
             //  TODO: redo this to be more Backbone-esque
@@ -74,7 +87,9 @@ define([
                 this.get('_availableArtists').remove(artist);
 
                 var newArtist = this._randomArtist(this.get('_availableArtists'));
-                this._getAlbumForArtist(newArtist);
+                if (newArtist) {
+                    this._getAlbumForArtist(newArtist);
+                }
             },
 
             //  Randomly selects an amount of artists from collection

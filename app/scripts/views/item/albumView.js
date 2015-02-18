@@ -28,7 +28,7 @@ function( Backbone, AlbumViewTmpl  ) {
 
 		/* on render callback */
 		onRender: function() {
-			
+			console.log('rendering an album');
 		}
 	});
 

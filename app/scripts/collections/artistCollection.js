@@ -1,8 +1,9 @@
 define([
         'backbone',
-        'model/artist',
+        'application',
+        'models/artist',
     ],
-    function(Backbone, Artist) {
+    function(Backbone, Application, Artist) {
         'use strict';
 
         /* Return a collection class definition */
@@ -12,10 +13,12 @@ define([
             url: 'http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar',
 
             initialize: function(options) {
-                console.log("initialize a Artistcollection collection");
-
+                console.log("initialize a Artistcollection collection with options", options);
                 this.options = options || {};
-                this._setBaseArtist();
+
+                if(this.options.artist) {
+                    this._setBaseArtist();
+                }
             },
 
             fetch: function() {
@@ -26,6 +29,10 @@ define([
             },
 
             parse: function(response) {
+                if(response.error) {
+                    App.vent.trigger('artistCollection:responseError', response);
+                    return [];
+                }
                 return response.similarartists.artist;
             },
 
