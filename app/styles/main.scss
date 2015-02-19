@@ -18,10 +18,19 @@ body {
 
 .header {
     h1 {
+        img {
+            width: 25px;
+        }
         font-size: 3em;
+
+        padding-left: 20px;
     }
+
     border-bottom: 1px solid #e5e5e5;
-    background-color: rgba(51, 122, 183, 0.35);
+}
+
+.search-bar-region {
+    padding-top: 20px;
 }
 /* Custom page footer */
 
