@@ -10,13 +10,8 @@ define(function(require) {
             //  No sorting needed
             comparator: false,
 
-            initialize: function(options) {
+            initialize: function() {
                 console.log('initialize a Albumcollection collection');
-
-                // todo: factor this out
-                if (options && options.artist) {
-                    this._baseArtist = options.artist;
-                }
             }
 
         });

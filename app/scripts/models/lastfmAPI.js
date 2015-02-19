@@ -5,11 +5,12 @@ define(function(require) {
     var LastfmServiceType = require('common/enum/lastfmServiceType');
 
     var LastfmAPI = Backbone.Model.extend({
+        
     	getTopAlbums: function(options) {
     		return this._doRequest(LastfmServiceType.GetTopAlbums, {
     			success: function(response) {
     				if(response.error) {
-    					options.error();
+    					options.error(response);
     					return;
     				} 
 
@@ -25,6 +26,27 @@ define(function(require) {
     			complete: options.complete,
     		}, options.ajaxDataOptions);
     	},
+
+        getSimilarArtists: function(options) {
+            return this._doRequest(LastfmServiceType.GetSimilarArtists, {
+                success: function(response) {
+                    if(response.error) {
+                        options.error(response);
+                        return;
+                    } 
+
+                    var similarArtists = [];
+
+                    if(response.similarartists && response.similarartists.artist) {
+                        similarArtists = response.similarartists.artist;
+                    }
+
+                    options.success(similarArtists);
+                },
+                error: options.error,
+                complete: options.complete,
+            }, options.ajaxDataOptions);
+        },
 
     	//	serviceType: the method or endpoint on the server you want to call
     	//	ajaxOptions: options specifically for ajax, typically success/error callbacks 

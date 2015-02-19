@@ -13,8 +13,10 @@ define(function(require) {
             dialog: Backbone.Wreqr.radio.channel('dialog'),
             notification: Backbone.Wreqr.radio.channel('notification'),
             window: Backbone.Wreqr.radio.channel('window'),
+            albumGrid: Backbone.Wreqr.radio.channel('albumGrid'),
             searchBar: Backbone.Wreqr.radio.channel('searchBar'),
             artistCollection: Backbone.Wreqr.radio.channel('artistCollection'),
+            artist: Backbone.Wreqr.radio.channel('artist'),
         },
 
         initialize: function() {
