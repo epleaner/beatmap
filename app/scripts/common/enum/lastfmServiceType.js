@@ -1,3 +1,4 @@
 define({
-    GetTopAlbums: 'artist.gettopalbums'
+    GetTopAlbums: 'artist.gettopalbums',
+    GetSimilarArtists: 'artist.getsimilar'
 });

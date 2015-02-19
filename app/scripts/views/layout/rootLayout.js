@@ -8,17 +8,13 @@ define(function(require) {
         /* Return a Layout class definition */
         return Backbone.Marionette.LayoutView.extend({
 
-            initialize: function() {
-                console.log("initialize a RootLayout Layout");
-            },
+            initialize: function() {},
 
             template: RootLayoutTmpl,
 
-            // el: 'body',
-
             /* Layout sub regions */
             regions: {
-            	searchBar: '#search-bar-region',
+            	searchBar: '.search-bar-region',
                 resultsGrid: '.results-grid-region'
             },
 
@@ -28,14 +24,10 @@ define(function(require) {
             /* Ui events hash */
             events: {},
 
-            onBeforeRender: function() {
-            	console.log('on before render root layout');
-            },
+            onBeforeRender: function() {},
 
             /* on render callback */
             onRender: function() {
-                console.log('rendering a root layout');
-
             	this._showRegionViews();
             	this._setupAppVentListeners();
             },
@@ -59,10 +51,12 @@ define(function(require) {
                 this.getRegion('resultsGrid').show(new AlbumGridView());
             },
             
+            //  todo: have a searching view
             _showSearchingView: function(searchVal) {
             	console.log('searching for', searchVal);
             },
 
+            //  todo: have a bad search view
             _showBadSearchView: function(searchVal) {
                 console.log('bad search val', searchVal);
             }

@@ -1,8 +1,7 @@
-define([
-        'hbs!tmpl/item/searchBarView_tmpl'
-    ],
-    function(SearchBarViewTmpl) {
+define(function(require) {
         'use strict';
+
+        var SearchBarViewTemplate = require('hbs!tmpl/item/searchBarView_tmpl');
 
         /* Return a ItemView class definition */
         return Backbone.Marionette.ItemView.extend({
@@ -11,7 +10,7 @@ define([
                 console.log("initialize a Searchview ItemView");
             },
 
-            template: SearchBarViewTmpl,
+            template: SearchBarViewTemplate,
 
 
             /* ui selector cache */
@@ -32,6 +31,7 @@ define([
 
             _triggerSearch: function() {
             	var searchVal = this.ui.searchInput.val();
+                
                 if(searchVal !== '') {
                     Beatmap.channels.searchBar.vent.trigger('search', searchVal);
                 } else {

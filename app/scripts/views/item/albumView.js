@@ -1,19 +1,15 @@
-define([
-	'backbone',
-	'hbs!tmpl/item/albumView_tmpl'
-],
-function( Backbone, AlbumViewTmpl  ) {
+define(function(require) {
     'use strict';
+
+    var AlbumViewTemplate = require('hbs!tmpl/item/albumView_tmpl');
 
 	/* Return a ItemView class definition */
 	return Backbone.Marionette.ItemView.extend({
 
 		initialize: function() {
-			console.log("initialize a Albumview ItemView");
 		},
 		
-    	template: AlbumViewTmpl,
-        
+    	template: AlbumViewTemplate,
 
     	/* ui selector cache */
     	ui: {},
@@ -28,7 +24,6 @@ function( Backbone, AlbumViewTmpl  ) {
 
 		/* on render callback */
 		onRender: function() {
-			console.log('rendering an album');
 		}
 	});
 

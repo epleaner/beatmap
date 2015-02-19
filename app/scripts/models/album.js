@@ -1,14 +1,14 @@
-define([
-	'backbone'
-],
-function( Backbone ) {
+define(function(require) {
     'use strict';
+
+    // todo: these should be stored somewhere better maybe?
+    var defaultLastfmAlbumArtwork = 'http://cdn.last.fm/flatness/catalogue/noimage/2/default_album_medium.png';
+    var defaultLocalAlbumArtwork = 'images/blankalbumart.png';
+    var youtubeSearchBase = 'https://www.youtube.com/results?search_query=';
 
 	/* Return a model class definition */
 	return Backbone.Model.extend({
 		initialize: function() {
-			console.log('initialize a Album model');
-
 			this._setXlArtwork();
 			this._setAltText();
 			this._setYoutubeLink();
@@ -19,19 +19,21 @@ function( Backbone ) {
 			artist: {
 				name: 'Artist name unknown'
 			},
-			name: 'Album name unknown'
+			name: 'Album name unknown',
+			youtubeLink: ''
 		},
 
 		_setXlArtwork: function() {
 			var artworkUrl;
 
 			if (this.get('image')) {
+				//	gets the filepath of the extra large image 
                 artworkUrl = _.where(this.get('image'), {
                     size: 'extralarge'
                 }).shift()['#text'];
 
-                if (artworkUrl === 'http://cdn.last.fm/flatness/catalogue/noimage/2/default_album_medium.png') {
-                    artworkUrl = 'images/blankalbumart.png';
+                if (artworkUrl === defaultLastfmAlbumArtwork) {
+                    artworkUrl = defaultLocalAlbumArtwork;
                 }
                 
                 this.set('artworkUrl', artworkUrl);
@@ -40,17 +42,15 @@ function( Backbone ) {
 
 		_setAltText: function() {
 			//	bug: Why is this not displaying properly in the html?
-            var altText = this.get('artist').name + ': ' + this.get('name');
+            var altText = this.get('artist').name + ' – ' + this.get('name');
             this.set('altText', altText);
 		},
 
 		_setYoutubeLink: function() {
-            var linkBase = 'https://www.youtube.com/results?search_query=';
+            var searchString = this.get('name') + ' ' + this.get('artist').name + ' ' + 'full album';
+            searchString = searchString.split(' ').join('+');
 
-            var search = this.get('name') + ' ' + this.get('artist').name + ' ' + 'full album';
-            search = search.split(' ').join('+');
-
-            this.set('youtubeLink', linkBase + search);
+            this.set('youtubeLink', youtubeSearchBase + searchString);
         }
 
     });
