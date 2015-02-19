@@ -1,61 +1,22 @@
-define([
-        'backbone',
-        'models/album'
-    ],
-    function(Backbone, Album) {
+define(function(require) {
         'use strict';
 
+        var Album = require('models/album');
+        
         /* Return a collection class definition */
         return Backbone.Collection.extend({
-            url: 'http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums',
-
             model: Album,
 
-            //  No sorting
+            //  No sorting needed
             comparator: false,
 
             initialize: function(options) {
                 console.log('initialize a Albumcollection collection');
 
-                this.options = options || {};
-
-                if (this.options.artist) {
-                    this._setBaseArtist();
+                // todo: factor this out
+                if (options && options.artist) {
+                    this._baseArtist = options.artist;
                 }
-            },
-
-            fetch: function() {
-                var query = this._makeFetchQuery();
-
-                return Backbone.Collection.prototype.fetch.call(this, {
-                    data: query
-                });
-            },
-
-            parse: function(response) {
-                return response.topalbums.album || [];
-            },
-
-            // Private attributes and methods
-
-            _query: {
-                autocorrect: 1,
-                format: 'json',
-                api_key: '138f4284e02f7192bc7657b7534bbdb3'
-            },
-
-            _limitAlbum: 10,
-
-            _baseArtist: null,
-
-            _setBaseArtist: function() {
-                this._baseArtist = this.options.artist;
-            },
-
-            _makeFetchQuery: function() {
-                return $.extend({}, this._query, {
-                    artist: this._baseArtist.get('name')
-                });
             }
 
         });

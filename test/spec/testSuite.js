@@ -9,6 +9,7 @@ define(function() {
 		'spec/models/album.js',
 		'spec/models/albumGrid.js',
 		'spec/models/artist.js',
+		'spec/models/lastfmAPI.js',
 		'spec/views/collection/albumGridView.js',
 		'spec/views/item/albumView.js',
 		'spec/views/item/searchView.js',
