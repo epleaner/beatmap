@@ -1,20 +1,20 @@
-define([
-	'backbone',
-	'collections/albumCollection'
-],
-function( Backbone, AlbumCollection ) {
+define(function(require) {
     'use strict';
 
-	/* Return a model class definition */
-	return Backbone.Model.extend({
-		initialize: function() {
-			console.log("initialize a Artist model");
+    var AlbumCollection = require('collections/albumCollection');
+    var LastfmAPI = require('models/lastfmAPI');
 
-			this.set('topAlbums', new AlbumCollection([], {artist: this.get('name')}));
-			this.set('_albumsInGrid', new AlbumCollection([], {artist: this.get('name')}));
-		},
+    /* Return a model class definition */
+    return Backbone.Model.extend({
+        initialize: function() {
+            console.log("initialize a Artist model");
 
-		defaults: function() {
+            this.set('_albumsInGrid', new AlbumCollection([], {
+                artist: this.get('name')
+            }));
+        },
+
+        defaults: function() {
             return {
                 name: "Artist name not available",
 
@@ -24,16 +24,20 @@ function( Backbone, AlbumCollection ) {
 
                 _albumsInGrid: undefined,
 
-                _query: {
-                    autocorrect: 1,
-                    format: 'json',
-                    api_key: "138f4284e02f7192bc7657b7534bbdb3"
-                },
-
                 _limitAlbum: 3,
 
                 _fetchPromise: undefined,
             };
+        },
+
+        getTopAlbums: function() {
+            return LastfmAPI.getTopAlbums({
+                success: this._onGetTopAlbumsSuccess.bind(this),
+                error: this._onError.bind(this),
+                ajaxDataOptions: {
+                    artist: this.attributes.name
+                }
+            });
         },
 
         getAlbum: function() {
@@ -48,7 +52,7 @@ function( Backbone, AlbumCollection ) {
             //  Not currently fetching, and has not fetched yet, so fetch
             else if (this.get('_fetchPromise') === undefined) {
 
-                this.set('_fetchPromise', this.fetchAlbums());
+                this.set('_fetchPromise', this.getTopAlbums());
                 this.get('_fetchPromise').done(this.getAlbum.bind(this));
 
                 return this.get('_fetchPromise');
@@ -58,7 +62,7 @@ function( Backbone, AlbumCollection ) {
             else if (this.get('topAlbums').length === 0 || this.get('_albumsInGrid').length === this.get('topAlbums').length) {
                 this.trigger('noAlbums', this);
             }
-  
+
             //  Return an album
             else {
                 var album = this._getUnshownAlbum();
@@ -66,12 +70,12 @@ function( Backbone, AlbumCollection ) {
             }
         },
 
-        fetchAlbums: function() {
-            this.set('topAlbums', new AlbumCollection({
-                artist: this
-            }));
+        _onGetTopAlbumsSuccess: function(response) {
+            this.set('topAlbums', new AlbumCollection(response));
+        },
 
-            return this.get('topAlbums').fetch();
+        _onError: function(response) {
+            console.error(response);
         },
 
         _getUnshownAlbum: function() {

@@ -1,0 +1,3 @@
+define({
+    GetTopAlbums: 'artist.gettopalbums'
+});
