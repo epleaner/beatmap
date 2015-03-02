@@ -14,7 +14,7 @@ define(function(require) {
 
             /* Layout sub regions */
             regions: {
-            	searchBar: '.search-bar-region',
+                searchBar: '.search-bar-region',
                 resultsGrid: '.results-grid-region'
             },
 
@@ -51,9 +51,8 @@ define(function(require) {
                 this.getRegion('resultsGrid').show(new AlbumGridView());
             },
             
-            //  todo: have a searching view
             _showSearchingView: function(searchVal) {
-            	console.log('searching for', searchVal);
+                console.log('searching for', searchVal);
             },
 
             //  todo: have a bad search view
