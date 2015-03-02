@@ -20,3 +20,7 @@ TODO:
 * Playlist saving
 	- echonest/native -> export to lastfm/spotify
 * Youtube iframe
+
+BUGS:
+* Search button height is 1px less than input
+* Track list is cut off if too long
