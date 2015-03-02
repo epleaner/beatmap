@@ -12,10 +12,15 @@ define(function(require) {
     	template: AlbumViewTemplate,
 
     	/* ui selector cache */
-    	ui: {},
+    	ui: {
+    		'caption': 'figcaption',
+    		'details': '.details'
+    	},
 
 		/* Ui events hash */
-		events: {},
+		events: {
+			'click': '_showDetails'
+		},
 
 		/* model events */
 		modelEvents: {
@@ -24,6 +29,11 @@ define(function(require) {
 
 		/* on render callback */
 		onRender: function() {
+		},
+
+		_showDetails: function() {
+			this.ui.caption.toggleClass('full-height');
+			this.ui.details.toggleClass('hidden');
 		}
 	});
 

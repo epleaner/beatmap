@@ -33,10 +33,13 @@ define(function(require) {
                 //     return NoResultView;
             },
 
-            onAddChild: function() {
+            onAddChild: function(child) {
                 if (this._isLoading) {
                     this._isLoading = false;
                 }
+
+                //  get more detailed info for album being shown
+                child.model.getInfo();
             },
 
             /* ui selector cache */

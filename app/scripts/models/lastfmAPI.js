@@ -48,6 +48,22 @@ define(function(require) {
             }, options.ajaxDataOptions);
         },
 
+        getAlbumInfo: function(options) {
+            return this._doRequest(LastfmServiceType.GetAlbumInfo, {
+                success: function(response) {
+                    if(response.error) {
+                        options.error(response);
+                        return;
+                    } 
+
+                    var albumInfo = response.album;
+                    options.success(albumInfo);
+                },
+                error: options.error,
+                complete: options.complete,
+            }, options.ajaxDataOptions);
+        },
+
     	//	serviceType: the method or endpoint on the server you want to call
     	//	ajaxOptions: options specifically for ajax, typically success/error callbacks 
     	//	ajaxDataOptions: options passed along to the endpoint, for the API

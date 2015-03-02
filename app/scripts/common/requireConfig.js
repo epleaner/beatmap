@@ -19,13 +19,14 @@ define(function() {
             bootstrap: {
                 deps: ['jquery'],
                 exports: 'jquery'
-            }
+            },
         },
 
         paths: {
             jquery: '../bower_components/jquery/jquery',
             backbone: '../bower_components/backbone-amd/backbone',
             underscore: '../bower_components/underscore-amd/underscore',
+            moment: '../bower_components/moment/moment',
 
             /* alias all marionette libs */
             'backbone.marionette': '../bower_components/backbone.marionette/lib/core/backbone.marionette',
