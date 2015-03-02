@@ -10,6 +10,25 @@
                         <img src="images/svg/youtube.svg" alt="Youtube search"></img>
                     </a>
                 </p>
+                <div class="details hidden">
+                    <h6>Released: {{releasedate}}</h6>
+                    {{#if toptags}}
+                    <h6>Tags: 
+                        {{#each toptags}}
+                        <a href={{url}}>{{name}}</a>
+                        {{/each}}
+                    </h6>
+                    {{/if}}
+                    {{#if tracks}}
+                    <h6>Tracks: 
+                        {{#each tracks}}
+                        <li>
+                            <a href={{url}}>{{name}}</a> – {{duration}}
+                        </li>
+                        {{/each}}
+                    </h6>
+                    {{/if}}
+                </div>
             </figcaption>
     </figure>
 </div>

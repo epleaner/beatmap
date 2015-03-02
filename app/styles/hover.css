@@ -100,6 +100,16 @@
         -webkit-transform: translate3d(0, 100%, 0);
         transform: translate3d(0, 100%, 0);
     }
+    figure.effect-zoe figcaption.full-height {
+        height: 100%;
+        -webkit-transition: -webkit-transform 0.35s;
+        transition: transform 0.35s;
+    }
+    figure.effect-zoe figcaption .details {
+        clear:both;
+        float:left;
+        text-align:left;
+    }
     figure.effect-zoe h5 {
         float: left;
     }
