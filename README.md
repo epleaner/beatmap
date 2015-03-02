@@ -1,6 +1,5 @@
 # beatmap
 Music Discovery and Information Aggretator
-<<<<<<< HEAD
 
 Currently supports last.fm recommendations and rudimentary youtube lookup
 
@@ -21,5 +20,3 @@ TODO:
 * Playlist saving
 	- echonest/native -> export to lastfm/spotify
 * Youtube iframe
-=======
->>>>>>> origin

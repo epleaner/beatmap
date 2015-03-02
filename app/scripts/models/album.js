@@ -86,6 +86,7 @@ define(function(require) {
                 track.duration = moment().startOf('day').seconds(track.duration).format('m:ss');
             });
 
+            //  trigger change to view rerenders
             this.trigger('change');
         },
 
