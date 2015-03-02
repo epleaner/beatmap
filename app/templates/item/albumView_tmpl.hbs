@@ -20,12 +20,14 @@
                     </h6>
                     {{/if}}
                     {{#if tracks}}
-                    <h6>Tracks: 
-                        {{#each tracks}}
-                        <li>
-                            <a href={{url}}>{{name}}</a> – {{duration}}
-                        </li>
-                        {{/each}}
+                    <h6>Tracks:
+                        <ol>
+                            {{#each tracks}}
+                            <li>
+                                <a href={{url}}>{{name}}</a> – {{duration}}
+                            </li>
+                            {{/each}}
+                        </ol>
                     </h6>
                     {{/if}}
                 </div>
