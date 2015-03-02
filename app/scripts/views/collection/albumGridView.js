@@ -1,6 +1,7 @@
 define(function(require) {
         'use strict';
 
+        var LoadingView = require('views/item/loadingView');
         var AlbumView = require('views/item/albumView');
         var AlbumGrid = require('models/albumGrid');
         var AlbumCollection = require('collections/albumCollection');
@@ -26,8 +27,7 @@ define(function(require) {
             // todo: investigate why this is being called twice and if that is an issue
             getEmptyView: function() {
                 if (this._isLoading) {
-                    console.log('currently loading');
-                    // return this;
+                    return LoadingView;
                 }
                 // else if ( /*no results*/ )
                 //     return NoResultView;
@@ -54,7 +54,6 @@ define(function(require) {
 
             _setupAppVentListeners: function() {
                 Beatmap.channels.searchBar.vent.on('search', this._startSearch.bind(this));
-
                 Beatmap.channels.artist.vent.on('showAlbum', this._addAlbumToCollection.bind(this));
             },
 
