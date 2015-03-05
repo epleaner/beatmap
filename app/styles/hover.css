@@ -60,6 +60,11 @@
         font-size: 0;
         opacity: 0;
     }
+
+    .grid figure .details .tracks>ol {
+        overflow-y: scroll;
+        height: 190px;
+    }
     /*.grid figure h5 {
     word-spacing: -0.15em;
     font-weight: 300;
