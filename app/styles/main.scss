@@ -22,15 +22,20 @@ body {
         img {
             width: 25px;
         }
-        font-size: 3em;
+        font-size: 4em;
 
         padding-left: 20px;
+        text-align: center;
     }
 
-    border-bottom: 1px solid #e5e5e5;
+    // border-bottom: 1px solid #e5e5e5;
 }
 
 .search-bar-region {
+    .search-button {
+        //  for some reason the button is 1px smaller than the input
+        height: 34px;
+    }
     padding-top: 20px;
 }
 /* Custom page footer */
