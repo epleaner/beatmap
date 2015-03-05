@@ -44,7 +44,14 @@ body {
     p {
         text-align: right;
     }
-    padding-top: 19px;
+    nav {
+        span:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        text-align: center;
+    }
+    padding: 10px;
     background-color: #ffffff;
     color: #777;
     border-top: 1px solid #e5e5e5;
