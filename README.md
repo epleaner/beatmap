@@ -5,7 +5,7 @@ Currently supports last.fm recommendations and rudimentary youtube lookup
 
 TODO:
 * Basic UI
-	- navbar, about, color scheme
+	- color scheme
 	- no results page
 * Scraping rateyourmusic
 * Echonest API
