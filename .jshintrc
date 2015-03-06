@@ -18,5 +18,11 @@
     "unused": true,
     "strict": true,
     "trailing": true,
-    "smarttabs": true
+    "smarttabs": true,
+    "globals": {
+        "define": true,
+        "require": true,
+        "Backbone": false
+    }
+
 }

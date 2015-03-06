@@ -2,7 +2,6 @@
 @import "sass-bootstrap/lib/bootstrap";
 @import "hover.css";
 @import "loading.css";
-
 /* Space out content a bit */
 
 body {
@@ -10,7 +9,6 @@ body {
     padding-bottom: 20px;
     // font-family: 'Lato', 'Merriweather', serif;
 }
-
 .header, .footer {
     padding-left: 15px;
     padding-right: 15px;
@@ -23,14 +21,11 @@ body {
             width: 25px;
         }
         font-size: 4em;
-
         padding-left: 20px;
         text-align: center;
     }
-
     // border-bottom: 1px solid #e5e5e5;
 }
-
 .search-bar-region {
     .search-button {
         //  for some reason the button is 1px smaller than the input
@@ -45,6 +40,12 @@ body {
         text-align: right;
     }
     nav {
+        span {
+            a {
+                color: #777;
+            }
+            padding: 0px 5px;
+        }
         span:hover {
             text-decoration: underline;
             cursor: pointer;
@@ -61,3 +62,20 @@ body {
     width: 100%;
 }
 
+.modal.fade:not(.in) .modal-dialog {
+    -webkit-transform: translate3d(0, 125%, 0);
+    transform: translate3d(0, 125%, 0);
+}
+//  Center search placeholder text
+// ::-webkit-input-placeholder {
+//    text-align: center;
+// }
+// :-moz-placeholder { /* Firefox 18- */
+//    text-align: center;  
+// }
+// ::-moz-placeholder {  /* Firefox 19+ */
+//    text-align: center;  
+// }
+// :-ms-input-placeholder {  
+//    text-align: center; 
+// }

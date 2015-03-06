@@ -36,7 +36,8 @@ define(function(require) {
         },
 
         _showRootLayout: function() {
-            this.rootLayoutRegion.show(new RootLayoutView());
+            this.rootLayoutView = new RootLayoutView();
+            this.rootLayoutView.render();
         }
     });
 
