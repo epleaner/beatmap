@@ -51,8 +51,7 @@ define(function(require) {
 
             /* Private methods */
             _setupAppVentListeners: function() {
-                Beatmap.channels.searchBar.vent.on('search', this._showSearchingView.bind(this));
-                Beatmap.channels.searchBar.vent.on('badSearch', this._showBadSearchView.bind(this));
+                Beatmap.channels.searchBar.vent.on('search', this._onSearch.bind(this));
             },
             
             _showSearchBar: function() {
@@ -63,7 +62,8 @@ define(function(require) {
                 this.getRegion('resultsGrid').show(new AlbumGridView());
             },
             
-            _showSearchingView: function(searchVal) {
+            _onSearch: function(searchVal) {
+                Beatmap.gridSearchVal = searchVal;
                 console.log('searching for', searchVal);
             },
 
@@ -74,11 +74,6 @@ define(function(require) {
             _showContactModal: function() {
                 this.getRegion('dialogs').show(new ContactModal());
             },
-
-            //  todo: have a bad search view
-            _showBadSearchView: function(searchVal) {
-                console.log('bad search val', searchVal);
-            }
         });
 
     });
