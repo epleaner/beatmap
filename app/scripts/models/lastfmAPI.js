@@ -3,8 +3,13 @@ define(function(require) {
 
     var LastfmAPIKey = require('common/keys/lastfmAPIKey');
     var LastfmServiceType = require('common/enum/lastfmServiceType');
+    var LastfmErrorCodes = require('common/enum/lastfmErrorCodes');
 
     var LastfmAPI = Backbone.Model.extend({
+
+        initialize: function() {
+            this.errorCodes = LastfmErrorCodes;  
+        },
         
     	getTopAlbums: function(options) {
     		return this._doRequest(LastfmServiceType.GetTopAlbums, {

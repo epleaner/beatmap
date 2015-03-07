@@ -30,8 +30,12 @@ body {
         //  for some reason the button is 1px smaller than the input
         height: 34px;
     }
-    padding-top: 20px;
+    padding: 40px;
 }
+.no-results {
+    text-align: center;
+}
+
 /* Custom page footer */
 
 .footer {

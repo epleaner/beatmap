@@ -39,7 +39,7 @@ define(function(require) {
         getSimilar: function() {
             this._getSimilarPromise = LastfmAPI.getSimilarArtists({
                 success: this._onGetSimilarSuccess.bind(this),
-                error: this._onError.bind(this),
+                error: this._onGetSimilarError.bind(this),
                 ajaxDataOptions: {
                     artist: this.attributes.name
                 }
@@ -95,8 +95,12 @@ define(function(require) {
             Beatmap.channels.artist.vent.trigger('getSimilarArtistSuccess', this.attributes.similarArtists);
         },
 
+        _onGetSimilarError: function(response) {
+            Beatmap.channels.artist.vent.trigger('getSimilarArtistError', response);
+        },
+
         _onError: function(response) {
-            console.log('response error:', response.message);
+            console.log(response);
         },
 
         _getUnshownAlbum: function() {

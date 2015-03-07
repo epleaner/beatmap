@@ -22,7 +22,8 @@
     "globals": {
         "define": true,
         "require": true,
-        "Backbone": false
+        "Backbone": false,
+        "Beatmap": false
     }
 
 }
