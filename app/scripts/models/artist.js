@@ -27,7 +27,7 @@ define(function(require) {
 
             this._topAlbumsPromise = LastfmAPI.getTopAlbums({
                 success: this._onGetTopAlbumsSuccess.bind(this),
-                error: this._onError.bind(this),
+                error: this._onGetTopAlbumsError.bind(this),
                 ajaxDataOptions: {
                     artist: this.attributes.name
                 }
@@ -99,8 +99,9 @@ define(function(require) {
             Beatmap.channels.artist.vent.trigger('getSimilarArtistError', response);
         },
 
-        _onError: function(response) {
+        _onGetTopAlbumsError: function(response) {
             console.log(response);
+            Beatmap.channels.artist.vent.trigger('getTopAlbumsError', response);
         },
 
         _getUnshownAlbum: function() {
