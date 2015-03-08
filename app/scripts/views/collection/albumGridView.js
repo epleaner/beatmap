@@ -80,15 +80,18 @@ define(function(require) {
 
         _onNoResults: function(response) {
             this._isLoading = false;
+            this._noResults = true;
 
+            //  have to call render to show no results view
+            this.render();
+
+            //  handle specific error messages differently here
             if (response.error) {
                 console.log(response.message);
+
+                if (response.error === LastfmAPI.errorCodes.InvalidParameters) {}
             }
-            if (response.error === LastfmAPI.errorCodes.InvalidParameters) {
-                this._noResults = true;
-                //  have to call render to show no results view
-                this.render();
-            }
+
         }
     });
 

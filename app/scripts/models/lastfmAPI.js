@@ -42,8 +42,12 @@ define(function(require) {
 
                     var similarArtists = [];
 
-                    if(response.similarartists && response.similarartists.artist) {
+                    //  make sure similar artists exists and the artist property is an array
+                    if(response.similarartists && response.similarartists.artist.constructor === Array) {
                         similarArtists = response.similarartists.artist;
+                    } else {
+                        options.error(response);
+                        return;
                     }
 
                     options.success(similarArtists);

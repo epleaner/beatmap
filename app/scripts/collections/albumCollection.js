@@ -8,11 +8,6 @@ define(function(require) {
             model: Album,
 
             //  No sorting needed
-            comparator: false,
-
-            initialize: function() {
-                console.log('initialize a Albumcollection collection');
-            }
-
+            comparator: false
         });
     });
