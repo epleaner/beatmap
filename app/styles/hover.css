@@ -17,11 +17,10 @@
         overflow: hidden;
         margin: 10px 1%;
         min-width: 320px;
-        
         /*max-width: 480px;*/
         /*max-height: 360px;*/
-        width: 100%;
         
+        width: 100%;
         background: #000000;
         text-align: center;
     }
@@ -29,6 +28,7 @@
         position: relative;
         display: block;
         /*min-height: 100%;*/
+        
         min-width: 100%;
     }
     .grid figure figcaption {
@@ -60,10 +60,9 @@
         font-size: 0;
         opacity: 0;
     }
-
     .grid figure .details .tracks>ol {
         overflow-y: scroll;
-        height: 190px;
+        height: 220px;
     }
     /*.grid figure h5 {
     word-spacing: -0.15em;
@@ -84,7 +83,6 @@
         position: absolute;
         right: 0;
     }
-
     .grid figure .icon-links img {
         width: 20px;
     }
@@ -111,9 +109,9 @@
         transition: transform 0.35s;
     }
     figure.effect-zoe figcaption .details {
-        clear:both;
-        float:left;
-        text-align:left;
+        clear: both;
+        float: left;
+        text-align: left;
     }
     figure.effect-zoe h5 {
         float: left;
@@ -125,6 +123,9 @@
     }
     figure.effect-zoe:hover p.icon-links a:hover, figure.effect-zoe:hover p.icon-links a:focus {
         color: #9DA7FF;
+        cursor: pointer;
+    }
+    figure.effect-zoe:hover {
         cursor: pointer;
     }
     figure.effect-zoe p.description {
