@@ -1,17 +1,26 @@
 # beatmap
+Beatmap
+=======
+
 Music Discovery and Information Aggretator
+------------------------------------------
 
-Currently supports last.fm recommendations and rudimentary youtube lookup
+<p>Beatmap is an exploration into available music services and what combining them can accomplish.</p>
 
-TODO:
+<h3>Currently supports</h3>
+* Last.fm recommendations
+* Spotify links
+* YouTube lookup
+
+
+<h3>TODO</h3>
 * Infinite Scroll / Dynamic Loading
 * Basic UI
-	- color scheme
-	– album details animation
+	* color scheme
+	* album details animation
 * Search by album
 * Scraping rateyourmusic
 * Echonest API
-	- musicbrainz artist id -> echonest -> spotify artist id -> spotify albums
 	- weigh recommendations
 * Beatmap API
 	- like album
