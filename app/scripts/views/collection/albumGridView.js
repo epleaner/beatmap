@@ -6,13 +6,16 @@ define(function(require) {
     var AlbumView = require('views/item/albumView');
     var AlbumGrid = require('models/albumGrid');
     var AlbumCollection = require('collections/albumCollection');
+    var AlbumGridTemplate = require('hbs!tmpl/collection/albumGridView_tmpl');
 
     var LastfmAPI = require('models/api/lastfmAPI');
 
     /* Return a ItemView class definition */
-    return Backbone.Marionette.CollectionView.extend({
+    return Backbone.Marionette.CompositeView.extend({
         className: 'row',
 
+
+        template: AlbumGridTemplate,
         //  todo: why would this not work
         // model: AlbumGrid,
         // collection: AlbumCollection,
