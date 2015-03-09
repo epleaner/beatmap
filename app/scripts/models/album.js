@@ -41,6 +41,7 @@ define(function(require) {
             });
         },
 
+        //  
         mergeSpotifyData: function(spotifyAlbum) {
             this.set('spotifyURL', spotifyAlbum.attributes.external_urls.spotify);
             this.set('spotifyID', spotifyAlbum.attributes.id);

@@ -152,21 +152,19 @@ define(function(require) {
             return this._spotifyAlbumsPromise;
         },
 
+        //  Once both the lastfm albums and spotify albums are retrieved,
+        //  merge the data of both albums. This goes through each lastfm album,
+        //  comparing the album's name to each spotify album's name. 
+        //  On a match, merge select Spotify data into the lastfm album.
         _mergeSpotifyLastfmAlbums: function() {
             var spotifyAlbums = this.attributes.spotifyAlbums.models;
             var lastfmAlbums = this.attributes.topAlbums.models;
-
-            var mergeAlbumInfo = function(lastfmAlbum, spotifyAlbum) {
-                lastfmAlbum.set('spotifyURL', spotifyAlbum.attributes.external_urls.spotify);
-                lastfmAlbum.set('spotifyID', spotifyAlbum.attributes.id);
-                lastfmAlbum.set('spotifyImages', spotifyAlbum.attributes.images);
-                lastfmAlbum.set('spotifyURI', spotifyAlbum.attributes.uri);
-            };
 
             var findSpotifyMatch = function(lastfmAlbum) {
                 var match = _.find(spotifyAlbums, function(spotifyAlbum) {
                     return spotifyAlbum.attributes.name === lastfmAlbum.attributes.name;
                 });
+                
                 if (match) {
                     lastfmAlbum.mergeSpotifyData(match);
                 }

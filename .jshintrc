@@ -24,6 +24,7 @@
         "require": true,
         "_": true,
         "$": true,
+        'moment': true,
         "Backbone": false,
         "Beatmap": false
     }
