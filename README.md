@@ -7,6 +7,10 @@ Music Discovery and Information Aggretator
 Beatmap is an exploration into available music services and what combining them can accomplish.
 Built on Backbone.js and Marionette.js
 
+### To start
+`bower install
+grunt`
+
 ### Currently supports
 * Last.fm recommendations
 * Spotify links
