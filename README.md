@@ -1,4 +1,3 @@
-# beatmap
 Beatmap
 =======
 
@@ -6,6 +5,7 @@ Music Discovery and Information Aggretator
 ------------------------------------------
 
 <p>Beatmap is an exploration into available music services and what combining them can accomplish.</p>
+<p>Built on Backbone.js and Marionette.js</p>
 
 <h3>Currently supports</h3>
 * Last.fm recommendations
@@ -26,7 +26,7 @@ Music Discovery and Information Aggretator
 	- like album
 	- dislike/hide album
 * Backend
-	- local storage & server storage
+	- local storage and server storage
 	- making/sharing playlists 
 * Playlist saving
 	- echonest/native -> export to lastfm/spotify
