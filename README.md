@@ -16,6 +16,7 @@ Built on Backbone.js and Marionette.js
 ### TODO
 * Infinite Scroll / Dynamic Loading
 * Basic UI
+	* favicon
 	* color scheme
 	* album details animation
 * Search by album
