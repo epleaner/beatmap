@@ -4,16 +4,16 @@ Beatmap
 Music Discovery and Information Aggretator
 ------------------------------------------
 
-<p>Beatmap is an exploration into available music services and what combining them can accomplish.</p>
-<p>Built on Backbone.js and Marionette.js</p>
+Beatmap is an exploration into available music services and what combining them can accomplish.
+Built on Backbone.js and Marionette.js
 
-<h3>Currently supports</h3>
+### Currently supports
 * Last.fm recommendations
 * Spotify links
 * YouTube lookup
 
 
-<h3>TODO</h3>
+### TODO
 * Infinite Scroll / Dynamic Loading
 * Basic UI
 	* color scheme
