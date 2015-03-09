@@ -4,6 +4,7 @@ define(function(require) {
     var LastfmAPIKey = require('common/keys/lastfmAPIKey');
     var LastfmServiceType = require('common/enum/lastfmServiceType');
     var LastfmErrorCodes = require('common/enum/lastfmErrorCodes');
+    var LastfmAPIBaseUrl = require('common/strings/lastfmAPIBaseUrl');
 
     var LastfmAPI = Backbone.Model.extend({
 
@@ -78,7 +79,7 @@ define(function(require) {
     	//	ajaxDataOptions: options passed along to the endpoint, for the API
     	_doRequest: function (serviceType, ajaxOptions, ajaxDataOptions) {
             return $.ajax(_.extend(ajaxOptions, {
-                url: 'http://ws.audioscrobbler.com/2.0/?method=' + serviceType,
+                url: LastfmAPIBaseUrl + serviceType,
                 data: _.extend({
                     api_key: LastfmAPIKey,
                     autocorrect: 1,

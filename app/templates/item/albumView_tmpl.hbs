@@ -6,6 +6,11 @@
                     <span><p>{{artist.name}}</p></span>
                 </h5>
                 <p class="icon-links">
+                    {{#if spotifyURI}}
+                    <a href="{{spotifyURI}}" target="_blank">
+                        <img src="images/svg/spotify.svg" alt="Spotify URL"></img>
+                    </a>
+                    {{/if}}
                     <a href="{{youtubeLink}}" target="_blank">
                         <img src="images/svg/youtube.svg" alt="Youtube search"></img>
                     </a>

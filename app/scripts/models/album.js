@@ -1,7 +1,7 @@
 define(function(require) {
     'use strict';
 
-    var LastfmAPI = require('models/lastfmAPI');
+    var LastfmAPI = require('models/api/lastfmAPI');
 
     // todo: these should be stored somewhere better maybe?
     var defaultLastfmAlbumArtwork = 'http://cdn.last.fm/flatness/catalogue/noimage/2/default_album_medium.png';
@@ -22,7 +22,11 @@ define(function(require) {
                 name: 'Artist name unknown'
             },
             name: 'Album name unknown',
-            youtubeLink: ''
+            youtubeLink: 'http://www.youtube.com',
+            spotifyURL: 'http://www.spotify.com',
+            spotifyID: '',
+            spotifyImages: [],
+            spotifyURI: ''
         },
 
         getInfo: function() {
@@ -37,12 +41,19 @@ define(function(require) {
             });
         },
 
+        mergeSpotifyData: function(spotifyAlbum) {
+            this.set('spotifyURL', spotifyAlbum.attributes.external_urls.spotify);
+            this.set('spotifyID', spotifyAlbum.attributes.id);
+            this.set('spotifyImages', spotifyAlbum.attributes.images);
+            this.set('spotifyURI', spotifyAlbum.attributes.uri);
+        },
+
         _onGetInfoSuccess: function(response) {
             //  album already has an artist object property
             //  that has more than what the response gives,
             //  so don't set the response's artist
             delete response.artist;
-            
+
             this.set(response);
 
             this._formatReleaseDate();

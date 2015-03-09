@@ -2,13 +2,16 @@ define(function(require) {
     'use strict';
 
     var AlbumCollection = require('collections/albumCollection');
-    var LastfmAPI = require('models/lastfmAPI');
+    var LastfmAPI = require('models/api/lastfmAPI');
+    var SpotifyAPI = require('models/api/spotifyAPI');
 
     /* Return a model class definition */
     return Backbone.Model.extend({
 
         initialize: function() {
             this._albumsInGrid = new AlbumCollection();
+
+            this._getSpotifyAlbums();
         },
 
         defaults: function() {
@@ -18,6 +21,7 @@ define(function(require) {
             return {
                 name: 'Artist name not available',
                 topAlbums: new AlbumCollection(),
+                spotifyAlbums: new AlbumCollection(),
                 similarArtists: new ArtistCollection(),
             };
         },
@@ -85,23 +89,41 @@ define(function(require) {
         _onGetTopAlbumsSuccess: function(response) {
             this.set('topAlbums', new AlbumCollection(response));
 
+            this._spotifyAlbumsPromise.done(this._mergeSpotifyLastfmAlbums.bind(this));
+
             this._topAlbumsPending = false;
             this._topAlbumsRetrieved = true;
         },
 
         _onGetSimilarSuccess: function(response) {
-            this.attributes.similarArtists.set(response);
+            //  Must require ArtistCollection here to avoid circular dependency issues
+            //  todo: avoid requiring this multiple times in one file
+            var ArtistCollection = require('collections/artistCollection');
+
+            this.set('similarArtists', new ArtistCollection(response));
 
             Beatmap.channels.artist.vent.trigger('getSimilarArtistSuccess', this.attributes.similarArtists);
+        },
+
+        _onGetSpotifyAlbumsSuccess: function(response) {
+            this.set('spotifyAlbums', new AlbumCollection(response));
+
+            if (this._topAlbumsRetrieved) {
+                this._mergeSpotifyLastfmAlbums();
+            }
+        },
+
+        _onGetTopAlbumsError: function(response) {
+            console.log('get top albums error', response);
+            Beatmap.channels.artist.vent.trigger('getTopAlbumsError', response);
         },
 
         _onGetSimilarError: function(response) {
             Beatmap.channels.artist.vent.trigger('getSimilarArtistError', response);
         },
 
-        _onGetTopAlbumsError: function(response) {
-            console.log(response);
-            Beatmap.channels.artist.vent.trigger('getTopAlbumsError', response);
+        _onGetSpotifyAlbumsError: function(response) {
+            debugger;
         },
 
         _getUnshownAlbum: function() {
@@ -116,6 +138,41 @@ define(function(require) {
             this._albumsInGrid.add(randomAlbum);
 
             return randomAlbum;
+        },
+
+        _getSpotifyAlbums: function() {
+            this._spotifyAlbumsPromise = SpotifyAPI.getArtistAlbums({
+                success: this._onGetSpotifyAlbumsSuccess.bind(this),
+                error: this._onGetSpotifyAlbumsError.bind(this),
+                ajaxDataOptions: {
+                    q: this.attributes.name,
+                }
+            });
+
+            return this._spotifyAlbumsPromise;
+        },
+
+        _mergeSpotifyLastfmAlbums: function() {
+            var spotifyAlbums = this.attributes.spotifyAlbums.models;
+            var lastfmAlbums = this.attributes.topAlbums.models;
+
+            var mergeAlbumInfo = function(lastfmAlbum, spotifyAlbum) {
+                lastfmAlbum.set('spotifyURL', spotifyAlbum.attributes.external_urls.spotify);
+                lastfmAlbum.set('spotifyID', spotifyAlbum.attributes.id);
+                lastfmAlbum.set('spotifyImages', spotifyAlbum.attributes.images);
+                lastfmAlbum.set('spotifyURI', spotifyAlbum.attributes.uri);
+            };
+
+            var findSpotifyMatch = function(lastfmAlbum) {
+                var match = _.find(spotifyAlbums, function(spotifyAlbum) {
+                    return spotifyAlbum.attributes.name === lastfmAlbum.attributes.name;
+                });
+                if (match) {
+                    lastfmAlbum.mergeSpotifyData(match);
+                }
+            };
+
+            _.each(lastfmAlbums, findSpotifyMatch);
         }
 
     });

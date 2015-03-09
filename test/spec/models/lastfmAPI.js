@@ -4,7 +4,7 @@
 	var root = this;
 
 	root.define([
-		'models/lastfmAPI'
+		'models/api/lastfmAPI'
 		],
 		function( Lastfmapi ) {
 

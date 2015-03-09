@@ -23,6 +23,7 @@
         "define": true,
         "require": true,
         "_": true,
+        "$": true,
         "Backbone": false,
         "Beatmap": false
     }
