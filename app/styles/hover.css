@@ -81,7 +81,7 @@
     }
     .grid figure .icon-links {
         position: absolute;
-        right: 0;
+        right: 1em;
     }
     .grid figure .icon-links img {
         width: 20px;

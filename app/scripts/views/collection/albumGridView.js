@@ -7,7 +7,7 @@ define(function(require) {
     var AlbumGrid = require('models/albumGrid');
     var AlbumCollection = require('collections/albumCollection');
 
-    var LastfmAPI = require('models/lastfmAPI');
+    var LastfmAPI = require('models/api/lastfmAPI');
 
     /* Return a ItemView class definition */
     return Backbone.Marionette.CollectionView.extend({
