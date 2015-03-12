@@ -6,18 +6,35 @@ define(function(require) {
     var AlbumView = require('views/item/albumView');
     var AlbumGrid = require('models/albumGrid');
     var AlbumCollection = require('collections/albumCollection');
+    var AlbumGridTemplate = require('hbs!tmpl/collection/albumGridView_tmpl');
 
     var LastfmAPI = require('models/api/lastfmAPI');
 
     /* Return a ItemView class definition */
-    return Backbone.Marionette.CollectionView.extend({
-        className: 'row',
+    return Backbone.Marionette.CompositeView.extend({
+        className: 'search-results-container',
+
+        template: AlbumGridTemplate,
 
         //  todo: why would this not work
         // model: AlbumGrid,
         // collection: AlbumCollection,
 
         childView: AlbumView,
+
+        childViewContainer: '.search-results',
+
+        ui: {
+            'loadMore': 'button.load-more-button'
+        },
+
+        events: {
+            'click @ui.loadMore': '_loadMore',
+        },
+
+        modelEvents: {
+            'change': 'render'
+        },
 
         initialize: function() {
             this._setupAppVentListeners();
@@ -28,32 +45,20 @@ define(function(require) {
 
         //  Used when collection has no children
         getEmptyView: function() {
-            if (this._isLoading) {
+            if (this.model.get('searchLoading')) {
                 return LoadingView;
-            } else if (this._noResults) {
+            } else if (this.model.get('noResults')) {
                 return NoResultsView;
             }
         },
 
         onAddChild: function(albumView) {
-            if (this._isLoading) {
-                this._isLoading = false;
+            if (this.model.get('searchLoading')) {
+                this._doneLoading();
             }
 
             //  get more detailed info for album being shown
             albumView.model.getInfo();
-        },
-
-        /* ui selector cache */
-        ui: {},
-
-        /* Ui events hash */
-        events: {},
-
-        /* on render callback */
-        onRender: function() {
-            this._isLoading = true;
-            this._noResults = false;
         },
 
         /*  Private methods */
@@ -74,13 +79,17 @@ define(function(require) {
         },
 
         _startSearch: function() {
-            this._isLoading = true;
+            this._startLoading();
             this.collection.reset();
         },
 
+        _loadMore: function() {
+            this.model.loadMore();
+        },
+
         _onNoResults: function(response) {
-            this._isLoading = false;
-            this._noResults = true;
+            this._doneLoading();
+            this.model.set('noResults', true);
 
             //  have to call render to show no results view
             this.render();
@@ -91,7 +100,16 @@ define(function(require) {
 
                 if (response.error === LastfmAPI.errorCodes.InvalidParameters) {}
             }
+        },
 
+        _startLoading: function() {
+            this.model.set('searchLoading', true);
+            this.model.set('searchComplete', false);
+        },
+
+        _doneLoading: function() {
+            this.model.set('searchLoading', false);
+            this.model.set('searchComplete', true);
         }
     });
 

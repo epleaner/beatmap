@@ -13,6 +13,9 @@ define(function(require) {
         defaults: function() {
             return {
                 searchArtist: undefined,
+                searchLoading: false,
+                noResults: false,
+                searchComplete: false
             };
         },
 
@@ -55,7 +58,7 @@ define(function(require) {
             _.invoke(initialArtistsToShow, 'getAlbum');
         },
 
-        _showMore: function() {
+        loadMore: function() {
             var artistsToShow = this._randomArtists(
                 this._availableArtists,
                 this._loadMoreCount);
