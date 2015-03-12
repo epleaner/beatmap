@@ -19,13 +19,14 @@ Built on Backbone.js and Marionette.js
 
 
 ### TODO
-* Infinite Scroll / Dynamic Loading
+* Infinite Scroll
 * Basic UI
 	* favicon
 	* color scheme
 	* album details animation
 * Search by album
 * Scraping rateyourmusic
+	* weigh recommendations based on RYM rank
 * Echonest API
 	- weigh recommendations
 * Beatmap API
