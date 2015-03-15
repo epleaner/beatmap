@@ -56,7 +56,7 @@ define(function(require) {
             delete response.artist;
 
             this.set(response);
-
+            
             this._formatReleaseDate();
             this._flattenTopTags();
             this._flattenTracks();

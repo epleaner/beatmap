@@ -1,9 +1,12 @@
+@import "variables.scss";
 @import "normalize.css";
 @import "sass-bootstrap/lib/bootstrap";
-@import "hover.css";
+@import "hover.scss";
 @import "loading.css";
-/* Space out content a bit */
+@import "mixins.scss";
 
+
+/* Space out content a bit */
 body {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -25,6 +28,14 @@ body {
     }
     // border-bottom: 1px solid #e5e5e5;
 }
+a {
+    @include hover-transition;
+    color: #000;
+}
+a:hover {
+    color:$link-hover-color !important;
+}
+
 .search-bar-region {
     .search-button {
         //  for some reason the button is 1px smaller than the input
@@ -55,11 +66,13 @@ body {
             a {
                 color: #777;
             }
+            @include hover-transition;
             padding: 0px 5px;
         }
         span:hover {
             text-decoration: underline;
             cursor: pointer;
+            color:$link-hover-color;
         }
         text-align: center;
     }

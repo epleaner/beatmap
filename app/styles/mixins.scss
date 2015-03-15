@@ -1,0 +1,13 @@
+// http://jsfiddle.net/Marcel/xejsM/52/
+@mixin hover-transition() {
+	/* First we need to help some browsers along for this to work.
+     Just because a vendor prefix is there, doesn't mean it will
+     work in a browser made by that vendor either, it's just for
+     future-proofing purposes I guess. */
+  -o-transition:.1s ease-out;
+  -ms-transition:.1s ease-out;
+  -moz-transition:.1s ease-out;
+  -webkit-transition:.1s ease-out;
+  /* ...and now for the proper property */
+  transition:.1s ease-out;
+}

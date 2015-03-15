@@ -1,3 +1,7 @@
+@import "variables.scss";
+@import "mixins.scss";
+    
+
     @font-face {
         font-weight: normal;
         font-style: normal;
@@ -24,7 +28,7 @@
         background: #000000;
         text-align: center;
     }
-    .grid figure img {
+    .grid figure .social-icon {
         position: relative;
         display: block;
         /*min-height: 100%;*/
@@ -83,8 +87,13 @@
         position: absolute;
         right: 1em;
     }
-    .grid figure .icon-links img {
+    .grid figure .icon-links .social-icon {
         width: 20px;
+        @include hover-transition;
+    }
+    .grid figure .icon-links .social-icon:hover {
+        width: 20px;
+        fill: $link-hover-color;
     }
     /* Individual effects */
     /*---------------*/
