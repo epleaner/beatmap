@@ -123,7 +123,7 @@ define(function(require) {
         },
 
         _onGetSpotifyAlbumsError: function(response) {
-            debugger;
+            Beatmap.channels.artist.vent.trigger('getSpotifyAlbumsError', response);
         },
 
         _getUnshownAlbum: function() {

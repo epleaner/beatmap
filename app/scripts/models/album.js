@@ -41,7 +41,16 @@ define(function(require) {
             });
         },
 
-        //  
+        search: function() {
+            LastfmAPI.albumSearch({
+                success: this._onSearchSuccess.bind(this),
+                error: this._onSearchError.bind(this),
+                ajaxDataOptions: {
+                    album: this.attributes.name,
+                }
+            });
+        },
+
         mergeSpotifyData: function(spotifyAlbum) {
             this.set('spotifyURL', spotifyAlbum.attributes.external_urls.spotify);
             this.set('spotifyID', spotifyAlbum.attributes.id);
@@ -61,6 +70,14 @@ define(function(require) {
             this._flattenTopTags();
             this._flattenTracks();
             this._formatTrackDurations();
+        },
+
+        _onSearchSuccess: function(response) {
+            Beatmap.channels.album.vent.trigger('albumSearchSuccess', response);
+        },
+
+        _onSearchError: function() {
+            Beatmap.channels.album.vent.trigger('albumSearchError', response);
         },
 
         //  lastfm release date has hours but they're always 00:00
