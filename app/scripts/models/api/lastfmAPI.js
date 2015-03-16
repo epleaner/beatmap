@@ -11,6 +11,28 @@ define(function(require) {
         initialize: function() {
             this.errorCodes = LastfmErrorCodes;  
         },
+
+        albumSearch: function(options) {
+            return this._doRequest(LastfmServiceType.AlbumSearch, {
+                success: function(response) {
+                    if(response.error) {
+                        options.error(response);
+                        return;
+                    } 
+                    
+                    var album = {};
+
+                    //  take the first match
+                    if(response.results && response.results.albummatches && response.results.albummatches.album) {
+                        album = response.results.albummatches.album[0];
+                    }
+
+                    options.success(album);
+                },
+                error: options.error,
+                complete: options.complete,
+            }, options.ajaxDataOptions);
+        },
         
     	getTopAlbums: function(options) {
     		return this._doRequest(LastfmServiceType.GetTopAlbums, {

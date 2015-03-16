@@ -19,6 +19,7 @@ define(function(require) {
             searchBar: Backbone.Wreqr.radio.channel('searchBar'),
             artistCollection: Backbone.Wreqr.radio.channel('artistCollection'),
             artist: Backbone.Wreqr.radio.channel('artist'),
+            album: Backbone.Wreqr.radio.channel('album'),
         },
 
         initialize: function() {

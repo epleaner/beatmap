@@ -52,7 +52,15 @@ a:hover {
         text-align: center;
         padding: 25px 0px 50px 0px;
     }
-    
+}
+.search-description {
+    h6 {
+        text-align: center;
+    }
+}
+
+.text-capitalize {
+    text-transform: capitalize;
 }
 
 /* Custom page footer */

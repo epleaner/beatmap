@@ -2,6 +2,7 @@ define(function(require) {
     'use strict';
 
     var Artist = require('models/artist');
+    var Album = require('models/album');
     var ArtistCollection = require('collections/artistCollection');
 
     /* Return a model class definition */
@@ -13,6 +14,9 @@ define(function(require) {
         defaults: function() {
             return {
                 searchArtist: undefined,
+                searchAlbum: undefined,
+                searchQuery: '',
+                albumResults: false,
                 searchLoading: false,
                 noResults: false,
                 searchComplete: false
@@ -25,21 +29,44 @@ define(function(require) {
 
         _setupAppVentListeners: function() {
             //  Search bar channel
-            Beatmap.channels.searchBar.vent.on('search', this._artistSearch.bind(this));
+            Beatmap.channels.searchBar.vent.on('search', this._search.bind(this));
 
             //  Artist channel
             Beatmap.channels.artist.vent.on('getSimilarArtistSuccess', this._onGetSimilarArtistsSuccess.bind(this));
             Beatmap.channels.artist.vent.on('noAlbums', this._onArtistNoAlbums.bind(this));
         },
 
-        _artistSearch: function(artistName) {
+        _search: function(query) {
+            this.set('searchQuery', query);
+            debugger;
+            if(query.indexOf(' - ') !== -1) {
+                query = query.split(' - ');
 
+                this.set('albumResults', true);
+                this._albumSearch(query);
+            } else {
+                this.set('artistResults', true);
+                this._artistSearch(query);
+            }
+        },
+
+        _artistSearch: function(query) {
             var artist = new Artist({
-                name: artistName
+                name: query
             });
 
             this.set('searchArtist', artist);
             artist.getSimilar();
+        },
+
+        _albumSearch: function(query) {
+            var album = new Album({
+                name: query[0],
+                artist: query[1]
+            })
+
+            this.set('searchAlbum', album);
+            this._artistSearch(query[1]);
         },
 
         _onGetSimilarArtistsSuccess: function(response) {
