@@ -33,7 +33,6 @@ define(function(require) {
         },
 
         _artistSearch: function(artistName) {
-            console.log("grid model searching for", artistName);
 
             var artist = new Artist({
                 name: artistName

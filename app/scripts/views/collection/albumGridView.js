@@ -79,8 +79,8 @@ define(function(require) {
         },
 
         _startSearch: function() {
-            this._startLoading();
             this.collection.reset();
+            this._startLoading();
         },
 
         _loadMore: function() {
@@ -105,6 +105,7 @@ define(function(require) {
         _startLoading: function() {
             this.model.set('searchLoading', true);
             this.model.set('searchComplete', false);
+            this.model.set('noResults', false);
         },
 
         _doneLoading: function() {
