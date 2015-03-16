@@ -38,7 +38,7 @@ define(function(require) {
 
         _search: function(query) {
             this.set('searchQuery', query);
-            debugger;
+            
             if(query.indexOf(' - ') !== -1) {
                 query = query.split(' - ');
 
