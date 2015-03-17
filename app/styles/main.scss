@@ -1,6 +1,7 @@
 @import "variables.scss";
 @import "normalize.css";
 @import "sass-bootstrap/lib/bootstrap";
+@import "bootflat.scss";
 @import "hover.scss";
 @import "loading.css";
 @import "mixins.scss";
@@ -38,10 +39,10 @@ a:hover {
 
 .search-bar-region {
     .search-button {
-        //  for some reason the button is 1px smaller than the input
+        //  for some reason the button is 1px smaller than the input, so fix that here
         height: 34px;
     }
-    padding: 40px;
+    padding: 20px 0px;
 }
 .no-results {
     padding: 0px 30px;
