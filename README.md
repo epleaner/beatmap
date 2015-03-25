@@ -8,6 +8,8 @@ Beatmap is an exploration into available music services and what combining them 
 Built on Backbone.js and Marionette.js
 
 ### To start
+`npm install`
+
 `bower install`
 
 `grunt`
