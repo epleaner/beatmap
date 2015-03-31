@@ -146,10 +146,11 @@ define(function(require) {
 
         //  constructs search url for Youtube and Grooveshark, which work out quite well most of the time
         _setSearchLinks: function() {
-            var searchString = this.get('name') + ' ' + this.get('artist').name + ' ' + 'full album';
-            searchString = searchString.split(' ').join('+');
+            var searchString = this.get('name') + ' ' + this.get('artist').name;
+            
+            searchString = encodeURIComponent(searchString);
 
-            this.set('youtubeLink', youtubeSearchBase + searchString);
+            this.set('youtubeLink', youtubeSearchBase + searchString + '+full+album');
             this.set('groovesharkLink', groovesharkSearchBase + searchString);
         },
 
