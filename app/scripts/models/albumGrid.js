@@ -24,7 +24,7 @@ define(function(require) {
         },
 
         _initialAlbumCount: 16,
-        _loadMoreCount: 8,
+        _loadMoreCount: 16,
         _availableArtists: undefined,
 
         _setupAppVentListeners: function() {
