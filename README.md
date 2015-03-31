@@ -22,8 +22,6 @@ Built on Backbone.js and Marionette.js
 
 ### TODO
 * Bugs:
-	* Grooveshark search includes "full album"
-	* Escape search links (no '&')
 	* Have all links open in new tab/window
 	* Track list scroll broken
 * Increase "more" quantity
