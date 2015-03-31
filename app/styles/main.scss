@@ -1,17 +1,20 @@
 @import "variables.scss";
+@import "mixins.scss";
 @import "normalize.css";
 @import "sass-bootstrap/lib/bootstrap";
 @import "bootflat.scss";
 @import "hover.scss";
-@import "loading.css";
-@import "mixins.scss";
+@import "loading.scss";
 
-
+html {
+    height: 100%;
+}
 /* Space out content a bit */
 body {
-    padding-top: 20px;
     padding-bottom: 20px;
     // font-family: 'Lato', 'Merriweather', serif;
+    height: 100%;
+    //background-color: #5CD2FF;
 }
 .header, .footer {
     padding-left: 15px;
@@ -26,8 +29,10 @@ body {
         }
         font-size: 4em;
         text-align: center;
+        margin: 0px 0px 20px 0px;
     }
-    // border-bottom: 1px solid #e5e5e5;
+    background-color: $primary-color;
+    padding: 40px 0px 20px 0px;
 }
 a {
     @include hover-transition;
@@ -45,18 +50,19 @@ a:hover {
     padding: 20px 0px;
 }
 .no-results {
-    padding: 0px 30px;
+    padding: 10px 30px;
     text-align: center;
 }
 .results-grid-region {
     .load-more-container {
         text-align: center;
-        padding: 25px 0px 50px 0px;
+        padding: 10px 0px 50px 0px;
     }
 }
 .search-description {
     h6 {
         text-align: center;
+        padding-top: 10px;
     }
 }
 
@@ -73,7 +79,7 @@ a:hover {
     nav {
         span {
             a {
-                color: #777;
+                color: #434A54;
             }
             @include hover-transition;
             padding: 0px 5px;
@@ -85,14 +91,17 @@ a:hover {
         }
         text-align: center;
     }
-    padding: 10px;
+    padding: 5px;
     background-color: #ffffff;
-    color: #777;
     border-top: 1px solid #e5e5e5;
     position: fixed;
     left: 0px;
     bottom: 0px;
     width: 100%;
+}
+
+.loading-container {
+    margin-top: 40px;
 }
 
 .modal.fade:not(.in) .modal-dialog {
@@ -112,3 +121,16 @@ a:hover {
 // :-ms-input-placeholder {  
 //    text-align: center; 
 // }
+
+.borderless {
+    input {
+        border: none !important;
+    }
+    span button {
+        border: none !important;
+    }
+    border: none !important;
+}
+button.btn-default:hover {
+  background-color: $secondary-color;
+}
