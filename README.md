@@ -22,7 +22,6 @@ Built on Backbone.js and Marionette.js
 
 
 ### TODO
-- [ ] Increase "more" quantity
 - [ ] Routes/URL hashes
 	- [ ] search
 - [ ] Pandora API
