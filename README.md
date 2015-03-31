@@ -21,6 +21,22 @@ Built on Backbone.js and Marionette.js
 
 
 ### TODO
+* Bugs:
+	* Grooveshark search includes "full album"
+	* Escape search links (no '&')
+	* Have all links open in new tab/window
+	* Track list scroll broken
+* Increase "more" quantity
+* Routes/URL hashes
+	* search
+* Color scheme
+	* blue/green/purple
+	* #89C4F4 
+	* http://paletton.com/#uid=53u0u0kp1Zo1M+QfSZ3DRYwU6un
+* Pandora API
+	* Start radio
+* Streamus API
+	* Add songs to queue
 * Infinite Scroll
 * Basic UI
 	* favicon
@@ -40,4 +56,3 @@ Built on Backbone.js and Marionette.js
 * Playlist saving
 	- echonest/native -> export to lastfm/spotify
 * Youtube iframe
-test

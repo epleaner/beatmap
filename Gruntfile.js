@@ -150,96 +150,191 @@ module.exports = function(grunt) {
 
 
         // require
+        // requirejs: {
+        //     dist: {
+        //         // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
+        //         options: {
+        //             // `name` and `out` is set by grunt-usemin
+        //             baseUrl: 'app/scripts',
+        //             optimize: 'none',
+        //             paths: {
+        //                 'templates': '../../.tmp/scripts/templates'
+        //             },
+        //             // TODO: Figure out how to make sourcemaps work with grunt-usemin
+        //             // https://github.com/yeoman/grunt-usemin/issues/30
+        //             //generateSourceMaps: true,
+        //             // required to support SourceMaps
+        //             // http://requirejs.org/docs/errors.html#sourcemapcomments
+        //             preserveLicenseComments: false,
+        //             useStrict: true,
+        //             wrap: true,
+        //             //uglify2: {} // https://github.com/mishoo/UglifyJS2
+        //             pragmasOnSave: {
+        //                 //removes Handlebars.Parser code (used to compile template strings) set
+        //                 //it to `false` if you need to parse template strings even after build
+        //                 excludeHbsParser: true,
+        //                 // kills the entire plugin set once it's built.
+        //                 excludeHbs: true,
+        //                 // removes i18n precompiler, handlebars and json2
+        //                 excludeAfterBuild: true
+        //             }
+        //         }
+        //     }
+        // },
+
+        // requirejs: {
+        //     production: {
+        //         options: {
+        //           baseUrl: "app/scripts",
+        //           mainConfigFile: "app/scripts/common/requireConfig.js",
+        //           // name: "path/to/almond", // assumes a production build using almond
+        //           out: "app/scripts/optimized.js"
+        //         }
+        //     }
+        // },
         requirejs: {
-            dist: {
-                // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
+            production: {
+                //  All r.js options can be found here: https://github.com/jrburke/r.js/blob/master/build/example.build.js
                 options: {
-                    // `name` and `out` is set by grunt-usemin
-                    baseUrl: 'app/scripts',
-                    optimize: 'none',
-                    paths: {
-                        'templates': '../../.tmp/scripts/templates'
-                    },
-                    // TODO: Figure out how to make sourcemaps work with grunt-usemin
-                    // https://github.com/yeoman/grunt-usemin/issues/30
-                    //generateSourceMaps: true,
-                    // required to support SourceMaps
-                    // http://requirejs.org/docs/errors.html#sourcemapcomments
-                    preserveLicenseComments: false,
+                    baseUrl: '<%= yeoman.app %>/scripts',
+                    mainConfigFile: '<%= yeoman.app %>/scripts/common/requireConfig.js',
+                    // paths: {
+                    //     //  Paths fallbacks not supported in r.js so stub them with their fallbacks.
+                    //     backbone: 'thirdParty/backbone',
+                    //     'backbone.marionette': 'thirdParty/backbone.marionette',
+                    //     bootstrap: 'thirdParty/bootstrap',
+                    //     jquery: 'thirdParty/jquery',
+                    //     'jquery.browser': 'thirdParty/jquery.browser',
+                    //     'jquery.unveil': 'thirdParty/jquery.unveil',
+                    //     lodash: 'thirdParty/lodash',
+                    //     text: 'thirdParty/text'
+                    // },
+                    dir: 'dist',
+                    optimize: 'uglify',
+                    //  Skip optimizing CSS here because it is handled when building LESS
+                    // optimizeCss: 'none',
+                    //  Inlines the text for any text! dependencies, to avoid the separate
+                    //  async XMLHttpRequest calls to load those dependencies.
+                    inlineText: true,
                     useStrict: true,
-                    wrap: true,
-                    //uglify2: {} // https://github.com/mishoo/UglifyJS2
-                    pragmasOnSave: {
-                        //removes Handlebars.Parser code (used to compile template strings) set
-                        //it to `false` if you need to parse template strings even after build
-                        excludeHbsParser: true,
-                        // kills the entire plugin set once it's built.
-                        excludeHbs: true,
-                        // removes i18n precompiler, handlebars and json2
-                        excludeAfterBuild: true
-                    }
+                    stubModules: ['text'],
+                    findNestedDependencies: true,
+                    //  List the modules that will be optimized. All their immediate and deep
+                    //  dependencies will be included in the module's file when the build is done
+                    modules: [{
+                        name: 'main'
+                    }],
+                    //  Don't leave a copy of the file if it has been concatenated into a larger one.
+                    removeCombined: true,
+                    fileExclusionRegExp: /vsdoc.js$|.less$|.css$/,
+                    preserveLicenseComments: false
                 }
             }
         },
 
         useminPrepare: {
-            html: '<%= yeoman.app %>/index.html',
+            html: 'dist/index.html',
             options: {
-                dest: '<%= yeoman.dist %>'
-            }
-        },
-
-        usemin: {
-            html: ['<%= yeoman.dist %>/{,*/}*.html'],
-            css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
-            options: {
-                dirs: ['<%= yeoman.dist %>']
-            }
-        },
-
-        imagemin: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= yeoman.app %>/images',
-                    src: '{,*/}*.{png,jpg,jpeg}',
-                    dest: '<%= yeoman.dist %>/images'
-                }]
-            }
-        },
-
-        cssmin: {
-            dist: {
-                files: {
-                    '<%= yeoman.dist %>/styles/main.css': [
-                        '.tmp/styles/{,*/}*.css',
-                        '<%= yeoman.app %>/styles/{,*/}*.css'
-                    ]
+                flow: {
+                    html: {
+                        steps: {
+                            css: ['concat']
+                        },
+                        post: {}
+                    }
                 }
             }
         },
+        usemin: {
+            html: 'dist/index.html'
+        },
+
+        // useminPrepare: {
+        //     html: '<%= yeoman.app %>/index.html',
+        //     options: {
+        //         dest: '<%= yeoman.dist %>'
+        //     }
+        // },
+
+        // usemin: {
+        //     html: ['<%= yeoman.dist %>/{,*/}*.html'],
+        //     css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+        //     options: {
+        //         dirs: ['<%= yeoman.dist %>']
+        //     }
+        // },
+
+        // imagemin: {
+        //     dist: {
+        //         files: [{
+        //             expand: true,
+        //             cwd: '<%= yeoman.app %>/images',
+        //             src: '{,*/}*.{png,jpg,jpeg}',
+        //             dest: '<%= yeoman.dist %>/images'
+        //         }]
+        //     }
+        // },
+
+        // cssmin: {
+        //     dist: {
+        //         files: {
+        //             '<%= yeoman.dist %>/styles/main.css': [
+        //                 '.tmp/styles/{,*/}*.css',
+        //                 '<%= yeoman.app %>/styles/{,*/}*.css'
+        //             ]
+        //         }
+        //     }
+        // },
 
         htmlmin: {
             dist: {
                 options: {
-                    /*removeCommentsFromCDATA: true,
-                    // https://github.com/yeoman/grunt-usemin/issues/44
-                    //collapseWhitespace: true,
+                    removeComments: true,
+                    collapseWhitespace: true,
                     collapseBooleanAttributes: true,
                     removeAttributeQuotes: true,
                     removeRedundantAttributes: true,
                     useShortDoctype: true,
                     removeEmptyAttributes: true,
-                    removeOptionalTags: true*/
+                    removeOptionalTags: true
                 },
-                files: [{
-                    expand: true,
-                    cwd: '<%= yeoman.app %>',
-                    src: '*.html',
-                    dest: '<%= yeoman.dist %>'
-                }]
+                expand: true,
+                cwd: 'dist',
+                dest: 'dist/',
+                src: ['**/*.html', '!**/template/**']
             }
         },
+        //  Compress image sizes and move to dist folder
+        imagemin: {
+            files: {
+                expand: true,
+                cwd: 'dist/img',
+                src: ['**/*.{png,jpg,gif}'],
+                dest: 'dist/img'
+            }
+        },
+
+        // htmlmin: {
+        //     dist: {
+        //         options: {
+        //             removeCommentsFromCDATA: true,
+        //             // https://github.com/yeoman/grunt-usemin/issues/44
+        //             //collapseWhitespace: true,
+        //             collapseBooleanAttributes: true,
+        //             removeAttributeQuotes: true,
+        //             removeRedundantAttributes: true,
+        //             useShortDoctype: true,
+        //             removeEmptyAttributes: true,
+        //             removeOptionalTags: true
+        //         },
+        //         files: [{
+        //             expand: true,
+        //             cwd: '<%= yeoman.app %>',
+        //             src: '*.html',
+        //             dest: '<%= yeoman.dist %>'
+        //         }]
+        //     }
+        // },
 
         copy: {
             dist: {
@@ -315,19 +410,44 @@ module.exports = function(grunt) {
         // 'exec:mocha'
     ]);
 
+    // grunt.registerTask('build', [
+    //     // 'createDefaultTemplate',
+    //     // 'compass:dist',
+    //     'useminPrepare',
+    //     'requirejs',
+    //     'imagemin',
+    //     'htmlmin',
+    //     'concat',
+    //     'cssmin',
+    //     'uglify',
+    //     'copy',
+    //     'usemin'
+    // ]);
+
     grunt.registerTask('build', [
-        'createDefaultTemplate',
         'handlebars',
-        'compass:dist',
-        'useminPrepare',
-        'requirejs',
-        'imagemin',
-        'htmlmin',
-        'concat',
-        'cssmin',
-        'uglify',
-        'copy',
-        'usemin'
-    ]);
+        'requirejs', 
+        // 'less', 
+        'useminPrepare', 
+        'concat:generated', 
+        'usemin', 
+        'htmlmin', 
+        'imagemin', 
+        // 'rename:main', 
+        // 'replace:mainReferences', 
+        // 'replace:localDebug', 
+        // 'clean:dist'
+        ]);
+
+    // simple build task
+
+    // grunt.registerTask('build', [
+    //   'requirejs',
+    //   // 'useminPrepare',
+    //   // 'concat:generated',
+    //   // 'cssmin:generated',
+    //   // 'uglify:generated',
+    //   // 'usemin'
+    // ]);
 
 };
