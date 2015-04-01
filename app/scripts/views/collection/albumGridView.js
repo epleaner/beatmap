@@ -33,7 +33,8 @@ define(function(require) {
         },
 
         modelEvents: {
-            'change': 'render'
+            'change': 'render',
+            'search': '_startSearch'
         },
 
         initialize: function() {

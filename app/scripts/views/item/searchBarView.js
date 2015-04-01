@@ -3,18 +3,23 @@ define(function(require) {
 
     var SearchBarViewTemplate = require('hbs!tmpl/item/searchBarView_tmpl');
 
+    var SearchBar = Backbone.Model.extend({
+        defaults: {
+            query: ''
+        }
+    });
+
     /* Return a ItemView class definition */
     return Backbone.Marionette.ItemView.extend({
 
         initialize: function() {
             console.log("initialize a Searchview ItemView");
+            this.model = new SearchBar();
+
+            this._setupAppVentListeners();
         },
 
         template: SearchBarViewTemplate,
-
-        onShow: function() {
-            this._setupEnterKey();
-        },
 
         /* ui selector cache */
         ui: {
@@ -27,17 +32,30 @@ define(function(require) {
             'click @ui.searchButton': '_triggerSearch'
         },
 
+        modelEvents: {
+            'change': 'render'
+        },
+
         /* on render callback */
         onRender: function() {
             console.log('search view rendered');
+            this._setupEnterKey();
         },
 
         _triggerSearch: function() {
             var searchVal = this.ui.searchInput.val();
-
+            
             if (searchVal !== '') {
+                this.model.set('query', searchVal);
                 Beatmap.channels.searchBar.vent.trigger('search', searchVal);
+
+                var urlSearch = searchVal.split(' ').join('+');
+                Beatmap.router.navigate('#search/' + urlSearch);
             }
+        },
+
+        _setupAppVentListeners: function() {
+            Beatmap.channels.router.vent.on('search', this._setSearchVal.bind(this));
         },
 
         _setupEnterKey: function() {
@@ -47,7 +65,11 @@ define(function(require) {
                     this.ui.searchButton.click();
                 }
             }.bind(this));
-        }
+        },
+
+        _setSearchVal: function(searchVal) {
+            this.model.set('query', searchVal);
+        },
 
     });
 });

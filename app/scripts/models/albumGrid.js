@@ -30,6 +30,7 @@ define(function(require) {
         _setupAppVentListeners: function() {
             //  Search bar channel
             Beatmap.channels.searchBar.vent.on('search', this._search.bind(this));
+            Beatmap.channels.router.vent.on('search', this._search.bind(this));
 
             //  Artist channel
             Beatmap.channels.artist.vent.on('getSimilarArtistSuccess', this._onGetSimilarArtistsSuccess.bind(this));
@@ -39,6 +40,7 @@ define(function(require) {
         _search: function(query) {
             this.set('searchQuery', query);
             
+            //  check if searching for album ('foo - bar') or artist ('bar')
             if(query.indexOf(' - ') !== -1) {
                 query = query.split(' - ');
 
@@ -48,6 +50,8 @@ define(function(require) {
                 this.set('artistResults', true);
                 this._artistSearch(query);
             }
+
+            this.trigger('search');
         },
 
         _artistSearch: function(query) {
