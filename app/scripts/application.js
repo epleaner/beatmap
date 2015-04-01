@@ -14,6 +14,7 @@ define(function(require) {
             dialog: Backbone.Wreqr.radio.channel('dialog'),
             notification: Backbone.Wreqr.radio.channel('notification'),
             window: Backbone.Wreqr.radio.channel('window'),
+            router: Backbone.Wreqr.radio.channel('router'),
 
             albumGrid: Backbone.Wreqr.radio.channel('albumGrid'),
             searchBar: Backbone.Wreqr.radio.channel('searchBar'),
@@ -29,11 +30,11 @@ define(function(require) {
 
         _onStart: function() {
             console.log('application started');
-
-            new Router();
-            Backbone.history.start();
             
             this._showRootLayout();
+
+            this.router = new Router();
+            Backbone.history.start();
         },
 
         _showRootLayout: function() {
