@@ -22,8 +22,7 @@ Built on Backbone.js and Marionette.js
 
 
 ### TODO
-- [ ] Routes/URL hashes
-	- [ ] search
+- [x] Routes/URL hashes
 - [ ] Pandora API
 	- [ ] Start radio
 - [ ] Streamus API
