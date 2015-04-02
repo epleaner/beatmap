@@ -6,7 +6,7 @@ define(function(require) {
     var AlbumView = require('views/item/albumView');
     var AlbumGrid = require('models/albumGrid');
     var AlbumCollection = require('collections/albumCollection');
-    var AlbumGridTemplate = require('hbs!tmpl/collection/albumGridView_tmpl');
+    var AlbumGridTemplate = require('text!tmpl/collection/albumGridView_tmpl.html');
 
     var LastfmAPI = require('models/api/lastfmAPI');
 
@@ -14,7 +14,7 @@ define(function(require) {
     return Backbone.Marionette.CompositeView.extend({
         className: 'search-results-container',
 
-        template: AlbumGridTemplate,
+        template: _.template(AlbumGridTemplate),
 
         //  todo: why would this not work
         // model: AlbumGrid,

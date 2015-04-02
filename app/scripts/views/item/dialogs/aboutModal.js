@@ -1,9 +1,9 @@
 define(function(require) {
     'use strict';
-    var AboutModalTemplate = require('hbs!tmpl/item/dialogs/aboutModal_tmpl');
+    var AboutModalTemplate = require('text!tmpl/item/dialogs/aboutModal_tmpl.html');
 
     var AboutModal = Backbone.Marionette.ItemView.extend({
-        template: AboutModalTemplate,
+        template: _.template(AboutModalTemplate),
         ui: {
             modal: '#about-modal',
         },

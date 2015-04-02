@@ -22,6 +22,9 @@ define(function(require) {
             artist: {
                 name: 'Artist name unknown'
             },
+            releasedate: 'Unknown',
+            tracks: [],
+            toptags: [],
             name: 'Album name unknown',
             youtubeLink: 'http://www.youtube.com',
             groovesharkLink: 'http://www.grooveshark.com',

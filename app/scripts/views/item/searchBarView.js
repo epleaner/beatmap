@@ -1,7 +1,7 @@
 define(function(require) {
     'use strict';
 
-    var SearchBarViewTemplate = require('hbs!tmpl/item/searchBarView_tmpl');
+    var SearchBarViewTemplate = require('text!tmpl/item/searchBarView_tmpl.html');
 
     var SearchBar = Backbone.Model.extend({
         defaults: {
@@ -13,13 +13,12 @@ define(function(require) {
     return Backbone.Marionette.ItemView.extend({
 
         initialize: function() {
-            console.log("initialize a Searchview ItemView");
             this.model = new SearchBar();
 
             this._setupAppVentListeners();
         },
 
-        template: SearchBarViewTemplate,
+        template: _.template(SearchBarViewTemplate),
 
         /* ui selector cache */
         ui: {
