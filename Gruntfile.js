@@ -1,8 +1,8 @@
 'use strict';
-var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
-var mountFolder = function(connect, dir) {
-    return connect.static(require('path').resolve(dir));
-};
+// var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
+// var mountFolder = function(connect, dir) {
+//     return connect.static(require('path').resolve(dir));
+// };
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -50,13 +50,13 @@ module.exports = function(grunt) {
                     livereload: true
                 }
             }
-            /* not used at the moment
-            handlebars: {
-                files: [
-                    '<%= yeoman.app %>/templates/*.hbs'
-                ],
-                tasks: ['handlebars']
-            }*/
+            /* not used at the moment*/
+            // handlebars: {
+            //     files: [
+            //         '<%= yeoman.app %>/templates/*.hbs'
+            //     ],
+            //     tasks: ['handlebars']
+            // }
         },
 
         // testing server
@@ -124,7 +124,7 @@ module.exports = function(grunt) {
                 'Gruntfile.js',
                 '<%= yeoman.app %>/scripts/{,*/}*.js',
                 '!<%= yeoman.app %>/scripts/vendor/*',
-                'test/spec/{,*/}*.js'
+                // 'test/spec/{,*/}*.js'
             ]
         },
 
@@ -193,7 +193,7 @@ module.exports = function(grunt) {
         //     }
         // },
         requirejs: {
-            production: {
+            dist: {
                 //  All r.js options can be found here: https://github.com/jrburke/r.js/blob/master/build/example.build.js
                 options: {
                     baseUrl: '<%= yeoman.app %>/scripts',
@@ -209,7 +209,7 @@ module.exports = function(grunt) {
                     //     lodash: 'thirdParty/lodash',
                     //     text: 'thirdParty/text'
                     // },
-                    dir: 'dist',
+                    dir: '<%= yeoman.dist %>',
                     optimize: 'uglify',
                     //  Skip optimizing CSS here because it is handled when building LESS
                     // optimizeCss: 'none',
@@ -367,7 +367,7 @@ module.exports = function(grunt) {
                     amd: true
                 },
                 files: {
-                    '.tmp/scripts/templates.js': ['templates/**/*.hbs']
+                    '.tmp/scripts/templates.js': ['<%= yeoman.app %>/templates/**/*.hbs']
                 }
             }
         }
@@ -425,19 +425,19 @@ module.exports = function(grunt) {
     // ]);
 
     grunt.registerTask('build', [
-        'handlebars',
+        // 'handlebars',
         'requirejs', 
         // 'less', 
         'useminPrepare', 
         'concat:generated', 
         'usemin', 
-        'htmlmin', 
-        'imagemin', 
+        // 'htmlmin', 
+        // 'imagemin', 
         // 'rename:main', 
         // 'replace:mainReferences', 
         // 'replace:localDebug', 
         // 'clean:dist'
-        ]);
+    ]);
 
     // simple build task
 
