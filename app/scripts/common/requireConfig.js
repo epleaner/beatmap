@@ -11,14 +11,17 @@ define(function() {
         shim: {
             backbone: {
                 deps: [
-                    'underscore',
-                    'jquery'
+                'underscore',
+                'jquery'
                 ],
                 exports: 'Backbone'
             },
             bootstrap: {
                 deps: ['jquery'],
                 exports: 'jquery'
+            },
+            handlebars: {
+                exports: 'Handlebars'
             },
         },
 
@@ -41,7 +44,7 @@ define(function() {
             tmpl: '../templates',
 
             /* handlebars from the require handlerbars plugin below */
-            handlebars: '../bower_components/require-handlebars-plugin/Handlebars',
+            handlebars: '../bower_components/require-handlebars-plugin/hbs/handlebars',
 
             /* require handlebars plugin - Alex Sexton */
             i18nprecompile: '../bower_components/require-handlebars-plugin/hbs/i18nprecompile',
