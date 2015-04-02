@@ -50,3 +50,4 @@ Built on Backbone.js and Marionette.js
 ### BUGS
 - [ ] Have all links open in new tab/window
 - [ ] Track list scroll broken
+- [ ] Fix touch device album detail behavior
