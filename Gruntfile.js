@@ -1,8 +1,8 @@
 'use strict';
-var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
-var mountFolder = function(connect, dir) {
-    return connect.static(require('path').resolve(dir));
-};
+// var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
+// var mountFolder = function(connect, dir) {
+//     return connect.static(require('path').resolve(dir));
+// };
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -50,13 +50,13 @@ module.exports = function(grunt) {
                     livereload: true
                 }
             }
-            /* not used at the moment
-            handlebars: {
-                files: [
-                    '<%= yeoman.app %>/templates/*.hbs'
-                ],
-                tasks: ['handlebars']
-            }*/
+            /* not used at the moment*/
+            // handlebars: {
+            //     files: [
+            //         '<%= yeoman.app %>/templates/*.hbs'
+            //     ],
+            //     tasks: ['handlebars']
+            // }
         },
 
         // testing server
@@ -124,7 +124,7 @@ module.exports = function(grunt) {
                 'Gruntfile.js',
                 '<%= yeoman.app %>/scripts/{,*/}*.js',
                 '!<%= yeoman.app %>/scripts/vendor/*',
-                'test/spec/{,*/}*.js'
+                // 'test/spec/{,*/}*.js'
             ]
         },
 
@@ -437,7 +437,7 @@ module.exports = function(grunt) {
         // 'replace:mainReferences', 
         // 'replace:localDebug', 
         // 'clean:dist'
-        ]);
+    ]);
 
     // simple build task
 

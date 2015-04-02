@@ -3,7 +3,6 @@ define(function(require) {
 
     var Artist = require('models/artist');
     var Album = require('models/album');
-    var ArtistCollection = require('collections/artistCollection');
 
     /* Return a model class definition */
     return Backbone.Model.extend({
@@ -67,13 +66,13 @@ define(function(require) {
             var album = new Album({
                 name: query[0],
                 artist: query[1]
-            })
+            });
 
             this.set('searchAlbum', album);
             this._artistSearch(query[1]);
         },
 
-        _onGetSimilarArtistsSuccess: function(response) {
+        _onGetSimilarArtistsSuccess: function() {
             this._availableArtists = this.attributes.searchArtist.get('similarArtists').clone();
 
             this._showInitialArtists();

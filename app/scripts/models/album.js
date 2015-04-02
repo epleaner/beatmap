@@ -78,7 +78,7 @@ define(function(require) {
             Beatmap.channels.album.vent.trigger('albumSearchSuccess', response);
         },
 
-        _onSearchError: function() {
+        _onSearchError: function(response) {
             Beatmap.channels.album.vent.trigger('albumSearchError', response);
         },
 
