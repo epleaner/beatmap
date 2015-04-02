@@ -3,7 +3,7 @@ define(function(require) {
 
         var SearchBarView = require('views/item/searchBarView');
         var AlbumGridView = require('views/collection/AlbumGridView');
-        var RootLayoutTemplate = require('hbs!tmpl/layout/rootLayout_tmpl');
+        var RootLayoutTemplate = require('text!tmpl/layout/rootLayout_tmpl.html');
 
         var AboutModal = require('views/item/dialogs/aboutModal');
         var ContactModal = require('views/item/dialogs/contactModal');
@@ -15,7 +15,7 @@ define(function(require) {
 
             el: 'body',
 
-            template: RootLayoutTemplate,
+            template: _.template(RootLayoutTemplate),
 
             /* Layout sub regions */
             regions: {

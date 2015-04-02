@@ -1,9 +1,9 @@
 define(function(require) {
     'use strict';
-    var ContactModalTemplate = require('hbs!tmpl/item/dialogs/contactModal_tmpl');
+    var ContactModalTemplate = require('text!tmpl/item/dialogs/contactModal_tmpl.html');
 
     var ContactModal = Backbone.Marionette.ItemView.extend({
-        template: ContactModalTemplate,
+        template: _.template(ContactModalTemplate),
         ui: {
             modal: '#contact-modal',
         },

@@ -1,7 +1,7 @@
 define(function(require) {
     'use strict';
 
-    var AlbumViewTemplate = require('hbs!tmpl/item/albumView_tmpl');
+    var AlbumViewTemplate = require('text!tmpl/item/albumView_tmpl.html');
 
 	/* Return a ItemView class definition */
 	return Backbone.Marionette.ItemView.extend({
@@ -9,7 +9,7 @@ define(function(require) {
 		initialize: function() {
 		},
 		
-    	template: AlbumViewTemplate,
+    	template: _.template(AlbumViewTemplate),
 
     	/* ui selector cache */
     	ui: {
