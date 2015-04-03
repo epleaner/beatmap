@@ -28,19 +28,17 @@ module.exports = function(grunt) {
 
         // watch list
         watch: {
-
             compass: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
                 tasks: ['compass']
             },
-
             livereload: {
                 files: [
 
                     '<%= yeoman.app %>/*.html',
-                    '{.tmp,<%= yeoman.app %>}/styles/{,**/}*.css',
+                    '{.tmp,<%= yeoman.app %>}/styles/{,**/}*.{css,scss}',
                     '{.tmp,<%= yeoman.app %>}/scripts/{,**/}*.js',
-                    '{.tmp,<%= yeoman.app %>}/templates/{,**/}*.{hbs,html}',
+                    '{.tmp,<%= yeoman.app %>}/templates/{,**/}*.html',
                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
 
                     'test/spec/{,**/}*.js'
@@ -50,13 +48,6 @@ module.exports = function(grunt) {
                     livereload: true
                 }
             }
-            /* not used at the moment*/
-            // handlebars: {
-            //     files: [
-            //         '<%= yeoman.app %>/templates/*.hbs'
-            //     ],
-            //     tasks: ['handlebars']
-            // }
         },
 
         // testing server
@@ -140,7 +131,21 @@ module.exports = function(grunt) {
                 importPath: 'app/bower_components',
                 relativeAssets: true
             },
-            dist: {},
+            dist: {
+                options: {
+                    sassDir: '<%= yeoman.app %>/styles',
+                    cssDir: 'dist/styles',
+                    specify: '<%= yeoman.app %>/styles/main.scss',
+                    // imagesDir: '<%= yeoman.app %>/images',
+                    // javascriptsDir: '<%= yeoman.app %>/scripts',
+                    fontsDir: '<%= yeoman.app %>/styles/fonts',
+                    importPath: 'app/bower_components',
+                    relativeAssets: true,
+                    outputStyle: 'compressed',
+                    noLineComments: true,
+                    // clean: true
+                },
+            },
             server: {
                 options: {
                     debugInfo: true
@@ -182,16 +187,6 @@ module.exports = function(grunt) {
         //     }
         // },
 
-        // requirejs: {
-        //     production: {
-        //         options: {
-        //           baseUrl: "app/scripts",
-        //           mainConfigFile: "app/scripts/common/requireConfig.js",
-        //           // name: "path/to/almond", // assumes a production build using almond
-        //           out: "app/scripts/optimized.js"
-        //         }
-        //     }
-        // },
         requirejs: {
             dist: {
                 //  All r.js options can be found here: https://github.com/jrburke/r.js/blob/master/build/example.build.js
@@ -212,7 +207,7 @@ module.exports = function(grunt) {
                     dir: '<%= yeoman.dist %>',
                     optimize: 'uglify',
                     //  Skip optimizing CSS here because it is handled when building LESS
-                    // optimizeCss: 'none',
+                    optimizeCss: 'none',
                     //  Inlines the text for any text! dependencies, to avoid the separate
                     //  async XMLHttpRequest calls to load those dependencies.
                     inlineText: true,
@@ -222,12 +217,27 @@ module.exports = function(grunt) {
                     //  List the modules that will be optimized. All their immediate and deep
                     //  dependencies will be included in the module's file when the build is done
                     modules: [{
-                        name: 'main'
+                        name: 'main',
+                        insertRequire: ['main']
                     }],
                     //  Don't leave a copy of the file if it has been concatenated into a larger one.
                     removeCombined: true,
                     fileExclusionRegExp: /vsdoc.js$|.less$|.css$/,
-                    preserveLicenseComments: false
+                    preserveLicenseComments: false,
+                    noBuildTxt: true,
+                    wrap: true,
+                    almond: true
+                }
+            }
+        },
+
+        sass: {                              
+            dist: {                            
+                options: {
+                    style: 'compressed'
+                },
+                files: {                         
+                    'main.css': 'main.scss',       // 'destination': 'source'
                 }
             }
         },
@@ -346,8 +356,9 @@ module.exports = function(grunt) {
                     src: [
                         '*.{ico,txt}',
                         '.htaccess',
-                        'images/{,*/}*.{webp,gif}',
-                        'bower_components/requirejs/require.js'
+                        'images/**/*.{webp,gif,svg,png}',
+                        '*.html',
+                        // 'bower_components/requirejs/require.js'
                     ]
                 }]
             }
@@ -358,23 +369,6 @@ module.exports = function(grunt) {
                 rjsConfig: '<%= yeoman.app %>/scripts/main.js'
             }
         },
-
-        // handlebars
-        handlebars: {
-            compile: {
-                options: {
-                    namespace: 'JST',
-                    amd: true
-                },
-                files: {
-                    '.tmp/scripts/templates.js': ['<%= yeoman.app %>/templates/**/*.hbs']
-                }
-            }
-        }
-    });
-
-    grunt.registerTask('createDefaultTemplate', function() {
-        grunt.file.write('.tmp/scripts/templates.js', 'this.JST = this.JST || {};');
     });
 
     // starts express server with live testing via testserver
@@ -402,42 +396,39 @@ module.exports = function(grunt) {
     // todo fix these <-- EP: this was generated by yo marionette...
     grunt.registerTask('test', [
         'clean:server',
-        'createDefaultTemplate',
-        'handlebars',
         'compass',
         'connect:testserver',
-        //  todo: mocha is broken right now, not sure why
+        //  todo (EP): mocha is broken right now, not sure why
         // 'exec:mocha'
     ]);
 
-    // grunt.registerTask('build', [
-    //     // 'createDefaultTemplate',
-    //     // 'compass:dist',
+    grunt.registerTask('build', [
+        'requirejs',
+        'compass:dist',
     //     'useminPrepare',
-    //     'requirejs',
     //     'imagemin',
     //     'htmlmin',
     //     'concat',
     //     'cssmin',
     //     'uglify',
-    //     'copy',
+        'copy',
     //     'usemin'
-    // ]);
+    ]);
 
-    grunt.registerTask('build', [
+    // grunt.registerTask('build', [
         // 'handlebars',
-        'requirejs', 
-        // 'less', 
-        'useminPrepare', 
-        'concat:generated', 
-        'usemin', 
+        // 'requirejs', 
+        // 'sass:dist', 
+        // 'useminPrepare', 
+        // 'concat:generated', 
+        // 'usemin', 
         // 'htmlmin', 
         // 'imagemin', 
         // 'rename:main', 
         // 'replace:mainReferences', 
         // 'replace:localDebug', 
         // 'clean:dist'
-    ]);
+    // ]);
 
     // simple build task
 
