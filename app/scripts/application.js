@@ -30,7 +30,7 @@ define(function(require) {
 
         _onStart: function() {
             console.log('application started');
-            
+
             this._showRootLayout();
 
             this.router = new Router();
