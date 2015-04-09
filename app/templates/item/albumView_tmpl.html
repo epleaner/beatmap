@@ -2,8 +2,8 @@
     <figure class="effect-zoe">
         <img src=<%= artworkUrl %> alt=""/>
             <figcaption>
-                <h5><a href=<%= url %> alt=<%= name %>><%= name %></a>
-                    <span><p><a href=<%= artist.url %> alt=<%= artist.name %>><%= artist.name %></a></p></span>
+                <h5><a href=<%= url %> alt=<%= name %> target="_blank"><%= name %></a>
+                    <span><p><a href=<%= artist.url %> alt=<%= artist.name %> target="_blank"><%= artist.name %></a></p></span>
                 </h5>
                 <p class="icon-links">
                     <a href="<%= groovesharkLink %>" target="_blank">
@@ -35,7 +35,7 @@
                     <% if(toptags.length > 0) { %>
                     <h6>Tags: 
                         <% _.each(toptags, function(tag) { %>
-                        <a href=<%= tag.url %>><%= tag.name %></a>
+                        <a href=<%= tag.url %> target="_blank"><%= tag.name %></a>
                         <% }) %>
                     </h6>
                     <% } %>
@@ -44,7 +44,7 @@
                         <ol>
                             <% _.each(tracks, function(track) { %>
                             <li>
-                                <a href=<%= track.url %>><%= track.name %></a> – <%= track.duration %>
+                                <a href=<%= track.url %> target="_blank"><%= track.name %></a> – <%= track.duration %>
                             </li>
                             <% }) %>
                         </ol>
