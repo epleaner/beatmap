@@ -1,30 +1,20 @@
 'use strict';
-// var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
-// var mountFolder = function(connect, dir) {
-//     return connect.static(require('path').resolve(dir));
-// };
-
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to match all subfolders:
-// 'test/spec/**/*.js'
-// templateFramework: 'handlebars'
 
 module.exports = function(grunt) {
     // load all grunt tasks
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
     // show elapsed time at the end
     require('time-grunt')(grunt);
 
     // configurable paths
-    var yeomanConfig = {
+    var config = {
         app: 'app',
         dist: 'dist'
     };
 
     grunt.initConfig({
-        yeoman: yeomanConfig,
+        yeoman: config,
 
         // watch list
         watch: {
@@ -38,11 +28,8 @@ module.exports = function(grunt) {
                     '{.tmp,<%= yeoman.app %>}/styles/{,**/}*.{css,scss}',
                     '{.tmp,<%= yeoman.app %>}/scripts/{,**/}*.js',
                     '{.tmp,<%= yeoman.app %>}/templates/{,**/}*.html',
-                    '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
-
-                    'test/spec/{,**/}*.js'
+                    '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}'
                 ],
-                tasks: ['exec'],
                 options: {
                     livereload: true
                 }
@@ -58,15 +45,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-
-        // mocha command
-        exec: {
-            mocha: {
-                command: 'mocha-phantomjs http://localhost:<%= connect.testserver.options.port %>/test',
-                stdout: true
-            }
-        },
-
 
         // express app
         express: {
@@ -152,61 +130,14 @@ module.exports = function(grunt) {
             }
         },
 
-
-        // require
-        // requirejs: {
-        //     dist: {
-        //         // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
-        //         options: {
-        //             // `name` and `out` is set by grunt-usemin
-        //             baseUrl: 'app/scripts',
-        //             optimize: 'none',
-        //             paths: {
-        //                 'templates': '../../.tmp/scripts/templates'
-        //             },
-        //             // TODO: Figure out how to make sourcemaps work with grunt-usemin
-        //             // https://github.com/yeoman/grunt-usemin/issues/30
-        //             //generateSourceMaps: true,
-        //             // required to support SourceMaps
-        //             // http://requirejs.org/docs/errors.html#sourcemapcomments
-        //             preserveLicenseComments: false,
-        //             useStrict: true,
-        //             wrap: true,
-        //             //uglify2: {} // https://github.com/mishoo/UglifyJS2
-        //             pragmasOnSave: {
-        //                 //removes Handlebars.Parser code (used to compile template strings) set
-        //                 //it to `false` if you need to parse template strings even after build
-        //                 excludeHbsParser: true,
-        //                 // kills the entire plugin set once it's built.
-        //                 excludeHbs: true,
-        //                 // removes i18n precompiler, handlebars and json2
-        //                 excludeAfterBuild: true
-        //             }
-        //         }
-        //     }
-        // },
-
         requirejs: {
             dist: {
                 //  All r.js options can be found here: https://github.com/jrburke/r.js/blob/master/build/example.build.js
                 options: {
                     baseUrl: '<%= yeoman.app %>/scripts',
-                    mainConfigFile: '<%= yeoman.app %>/scripts/common/requireConfig.js',
-                    // paths: {
-                    //     //  Paths fallbacks not supported in r.js so stub them with their fallbacks.
-                    //     backbone: 'thirdParty/backbone',
-                    //     'backbone.marionette': 'thirdParty/backbone.marionette',
-                    //     bootstrap: 'thirdParty/bootstrap',
-                    //     jquery: 'thirdParty/jquery',
-                    //     'jquery.browser': 'thirdParty/jquery.browser',
-                    //     'jquery.unveil': 'thirdParty/jquery.unveil',
-                    //     lodash: 'thirdParty/lodash',
-                    //     text: 'thirdParty/text'
-                    // },
+                    mainConfigFile: '<%= yeoman.app %>/scripts/main.js',
                     dir: '<%= yeoman.dist %>',
                     optimize: 'uglify',
-                    //  Skip optimizing CSS here because it is handled when building LESS
-                    optimizeCss: 'none',
                     //  Inlines the text for any text! dependencies, to avoid the separate
                     //  async XMLHttpRequest calls to load those dependencies.
                     inlineText: true,
@@ -217,13 +148,12 @@ module.exports = function(grunt) {
                     //  dependencies will be included in the module's file when the build is done
                     modules: [{
                         name: 'main',
-                        insertRequire: ['main']
+                        // insertRequire: ['main']
                     }],
                     //  Don't leave a copy of the file if it has been concatenated into a larger one.
                     removeCombined: true,
-                    fileExclusionRegExp: /vsdoc.js$|.less$|.css$/,
-                    preserveLicenseComments: false,
                     noBuildTxt: true,
+                    preserveLicenseComments: false,
                     wrap: true,
                     almond: true
                 }
@@ -258,43 +188,6 @@ module.exports = function(grunt) {
             html: 'dist/index.html'
         },
 
-        // useminPrepare: {
-        //     html: '<%= yeoman.app %>/index.html',
-        //     options: {
-        //         dest: '<%= yeoman.dist %>'
-        //     }
-        // },
-
-        // usemin: {
-        //     html: ['<%= yeoman.dist %>/{,*/}*.html'],
-        //     css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
-        //     options: {
-        //         dirs: ['<%= yeoman.dist %>']
-        //     }
-        // },
-
-        // imagemin: {
-        //     dist: {
-        //         files: [{
-        //             expand: true,
-        //             cwd: '<%= yeoman.app %>/images',
-        //             src: '{,*/}*.{png,jpg,jpeg}',
-        //             dest: '<%= yeoman.dist %>/images'
-        //         }]
-        //     }
-        // },
-
-        // cssmin: {
-        //     dist: {
-        //         files: {
-        //             '<%= yeoman.dist %>/styles/main.css': [
-        //                 '.tmp/styles/{,*/}*.css',
-        //                 '<%= yeoman.app %>/styles/{,*/}*.css'
-        //             ]
-        //         }
-        //     }
-        // },
-
         htmlmin: {
             dist: {
                 options: {
@@ -313,6 +206,7 @@ module.exports = function(grunt) {
                 src: ['**/*.html', '!**/template/**']
             }
         },
+
         //  Compress image sizes and move to dist folder
         imagemin: {
             files: {
@@ -322,28 +216,6 @@ module.exports = function(grunt) {
                 dest: 'dist/img'
             }
         },
-
-        // htmlmin: {
-        //     dist: {
-        //         options: {
-        //             removeCommentsFromCDATA: true,
-        //             // https://github.com/yeoman/grunt-usemin/issues/44
-        //             //collapseWhitespace: true,
-        //             collapseBooleanAttributes: true,
-        //             removeAttributeQuotes: true,
-        //             removeRedundantAttributes: true,
-        //             useShortDoctype: true,
-        //             removeEmptyAttributes: true,
-        //             removeOptionalTags: true
-        //         },
-        //         files: [{
-        //             expand: true,
-        //             cwd: '<%= yeoman.app %>',
-        //             src: '*.html',
-        //             dest: '<%= yeoman.dist %>'
-        //         }]
-        //     }
-        // },
 
         copy: {
             dist: {
@@ -371,13 +243,7 @@ module.exports = function(grunt) {
     });
 
     // starts express server with live testing via testserver
-    grunt.registerTask('default', function(target) {
-
-        // what is this??
-        if (target === 'dist') {
-            return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
-        }
-
+    grunt.registerTask('default', function() {
         grunt.option('force', true);
 
         grunt.task.run([
@@ -385,21 +251,10 @@ module.exports = function(grunt) {
             'compass:server',
             'connect:testserver',
             'express:dev',
-            //  todo: mocha is broken right now, not sure why
-            // 'exec',
             'open',
             'watch'
         ]);
     });
-
-    // todo fix these <-- EP: this was generated by yo marionette...
-    grunt.registerTask('test', [
-        'clean:server',
-        'compass',
-        'connect:testserver',
-        //  todo (EP): mocha is broken right now, not sure why
-        // 'exec:mocha'
-    ]);
 
     grunt.registerTask('build', [
         'requirejs',
@@ -413,31 +268,5 @@ module.exports = function(grunt) {
         'copy',
     //     'usemin'
     ]);
-
-    // grunt.registerTask('build', [
-        // 'handlebars',
-        // 'requirejs', 
-        // 'sass:dist', 
-        // 'useminPrepare', 
-        // 'concat:generated', 
-        // 'usemin', 
-        // 'htmlmin', 
-        // 'imagemin', 
-        // 'rename:main', 
-        // 'replace:mainReferences', 
-        // 'replace:localDebug', 
-        // 'clean:dist'
-    // ]);
-
-    // simple build task
-
-    // grunt.registerTask('build', [
-    //   'requirejs',
-    //   // 'useminPrepare',
-    //   // 'concat:generated',
-    //   // 'cssmin:generated',
-    //   // 'uglify:generated',
-    //   // 'usemin'
-    // ]);
 
 };
