@@ -1,8 +1,13 @@
 define(function(require) {
         'use strict';
 
+        var RootModel = require('models/root');
+        var AlbumGridModel = require('models/albumGrid');
+
         var SearchBarView = require('views/item/searchBarView');
+        var InfoView = require('views/item/infoView');
         var AlbumGridView = require('views/collection/AlbumGridView');
+
         var RootLayoutTemplate = require('text!tmpl/layout/rootLayout_tmpl.html');
 
         var AboutModal = require('views/item/dialogs/aboutModal');
@@ -10,8 +15,7 @@ define(function(require) {
 
         /* Return a Layout class definition */
         return Backbone.Marionette.LayoutView.extend({
-
-            initialize: function() {},
+            model: new RootModel(),
 
             el: 'body',
 
@@ -21,7 +25,8 @@ define(function(require) {
             regions: {
                 searchBar: '.search-bar-region',
                 resultsGrid: '.results-grid-region',
-                dialogs: '.dialogs-region'
+                dialogs: '.dialogs-region',
+                info: '.info-region'
             },
 
             /* ui selector cache */
@@ -36,7 +41,13 @@ define(function(require) {
                 'click @ui.contact': '_showContactModal'
             },
 
-            onBeforeRender: function() {},
+            initialize: function() {
+                this.model.set('gridModel', new AlbumGridModel());
+                this.model.get('gridModel').on('change', this._onGridChange.bind(this));
+            },
+
+            onBeforeRender: function() {
+            },
 
             /* on render callback */
             onRender: function() {
@@ -44,8 +55,13 @@ define(function(require) {
             	this._setupAppVentListeners();
             },
 
+            _onGridChange: function() {
+
+            },
+
             _showRegionViews: function() {
                 this._showSearchBar();
+                this._showInfo();
                 this._showResultsGrid();
             },
 
@@ -58,8 +74,16 @@ define(function(require) {
                 this.getRegion('searchBar').show(new SearchBarView());
             },
 
+            _showInfo: function() {
+                this.getRegion('info').show(new InfoView({
+                    model: this.model.get('gridModel')
+                }));
+            },
+
             _showResultsGrid: function() {
-                this.getRegion('resultsGrid').show(new AlbumGridView());
+                this.getRegion('resultsGrid').show(new AlbumGridView({
+                    model: this.model.get('gridModel')
+                }));
             },
             
             _onSearch: function(searchVal) {

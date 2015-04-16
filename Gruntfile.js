@@ -20,12 +20,15 @@ module.exports = function(grunt) {
         watch: {
             compass: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-                tasks: ['compass']
+                tasks: ['compass:server'],
+                options: {
+                    nospawn: true,
+                    livereload: true
+                }
             },
             livereload: {
                 files: [
                     '<%= yeoman.app %>/*.html',
-                    '{.tmp,<%= yeoman.app %>}/styles/{,**/}*.{css,scss}',
                     '{.tmp,<%= yeoman.app %>}/scripts/{,**/}*.js',
                     '{.tmp,<%= yeoman.app %>}/templates/{,**/}*.html',
                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}'
@@ -33,7 +36,8 @@ module.exports = function(grunt) {
                 options: {
                     livereload: true
                 }
-            }
+            },
+
         },
 
         // testing server
@@ -102,11 +106,8 @@ module.exports = function(grunt) {
             options: {
                 sassDir: '<%= yeoman.app %>/styles',
                 cssDir: '.tmp/styles',
-                imagesDir: '<%= yeoman.app %>/images',
-                javascriptsDir: '<%= yeoman.app %>/scripts',
-                fontsDir: '<%= yeoman.app %>/styles/fonts',
                 importPath: 'app/bower_components',
-                relativeAssets: true
+                force: true //  force compass to overwrite old files
             },
             dist: {
                 options: {

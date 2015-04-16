@@ -1,0 +1,15 @@
+
+<div class="row search-description">
+	<h6>
+	<% if(searchComplete && !noResults) { %>
+
+		Showing results for <% if(albumResults) { %>
+		the album "<span class="text-capitalize"><%= searchAlbum.get('name') %></span>" by <span class="text-capitalize"><%= searchArtist.get('name') %></span>
+		<% } else { %>
+		the artist "<span class="text-capitalize"><%= searchArtist.get('name') %><span class="text-capitalize">"
+		</h6>
+		<% } %>
+
+	<% } %>
+</div>
+
