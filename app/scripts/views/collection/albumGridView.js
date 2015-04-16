@@ -4,7 +4,7 @@ define(function(require) {
     var LoadingView = require('views/item/loadingView');
     var NoResultsView = require('views/item/noResultsView');
     var AlbumView = require('views/item/albumView');
-    var AlbumGrid = require('models/albumGrid');
+    // var AlbumGrid = require('models/albumGrid');
     var AlbumCollection = require('collections/albumCollection');
     var AlbumGridTemplate = require('text!tmpl/collection/albumGridView_tmpl.html');
 
@@ -40,7 +40,7 @@ define(function(require) {
         initialize: function() {
             this._setupAppVentListeners();
 
-            this.model = new AlbumGrid();
+            // this.model = new AlbumGrid();
             this.collection = new AlbumCollection();
         },
 
