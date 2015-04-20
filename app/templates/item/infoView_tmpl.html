@@ -8,8 +8,12 @@
 		<% } else { %>
 		the artist "<span class="text-capitalize"><%= searchArtist.get('name') %><span class="text-capitalize">"
 		<% } %>
-		
+
+	<% } else if(!noResults) { %>
+		<%= Beatmap.strings.searchInfo %>
+		<h6 class="search-description"><%= Beatmap.strings.searchAlbumInstructions %></h6>
 	<% } %>
+
 	</h4>
 </div>
 

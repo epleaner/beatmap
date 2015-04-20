@@ -3,6 +3,7 @@ define(function(require) {
 
     var RootLayoutView = require('views/layout/rootLayout');
     var Router = require('router');
+    var Strings = require('common/strings/strings');
 
     var Application = Backbone.Marionette.Application.extend({
         regions: {
@@ -28,6 +29,9 @@ define(function(require) {
         },
 
         _onStart: function() {
+            //  Strings used throughout templates that can be easily localized
+            this.strings = Strings;
+
             this._showRootLayout();
 
             this.router = new Router();
