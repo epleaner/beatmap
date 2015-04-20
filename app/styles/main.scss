@@ -94,12 +94,17 @@ a:hover {
 }
 
 .search-description-container {
-    .search-description {
-        h6 {
-            text-align: center;
-            padding-top: 10px;
-        }   
+    .search-results-description {
         text-align: center;
+    }
+    .search-instructions {
+        text-align: center;
+    }
+    h4.search-instructions {
+        margin-top: 0px;
+    }
+    h6.search-instructions {
+        font-style: italic;
     }
     height: 40px;
 }
