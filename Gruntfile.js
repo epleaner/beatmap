@@ -82,7 +82,7 @@ module.exports = function(grunt) {
         },
 
         clean: {
-            dist: ['.tmp', '<%= yeoman.dist %>/*'],
+            dist: ['<%= yeoman.dist %>/*'],
             server: '.tmp'
         },
 
@@ -137,7 +137,7 @@ module.exports = function(grunt) {
                 options: {
                     baseUrl: '<%= yeoman.app %>/scripts',
                     mainConfigFile: '<%= yeoman.app %>/scripts/main.js',
-                    dir: '<%= yeoman.dist %>',
+                    dir: '<%= yeoman.dist %>/scripts',
                     optimize: 'uglify',
                     //  Inlines the text for any text! dependencies, to avoid the separate
                     //  async XMLHttpRequest calls to load those dependencies.
@@ -156,7 +156,17 @@ module.exports = function(grunt) {
                     noBuildTxt: true,
                     preserveLicenseComments: false,
                     wrap: true,
-                    almond: true
+                    //almond: true,
+
+                    //Sets the logging level. It is a number. If you want "silent" running,
+                    //set logLevel to 4. From the logger.js file:
+                    //TRACE: 0,
+                    //INFO: 1,
+                    //WARN: 2,
+                    //ERROR: 3,
+                    //SILENT: 4
+                    //Default is 0.
+                    logLevel: 3,
                 }
             }
         },
@@ -230,10 +240,22 @@ module.exports = function(grunt) {
                         '.htaccess',
                         'images/**/*.{webp,gif,svg,png}',
                         '*.html',
-                        // 'bower_components/requirejs/require.js'
+                        'bower_components/requirejs/require.js',
+                        'bower_components/modernizr/modernizr.js'
                     ]
                 }]
             }
+        },
+
+        replace: {
+          dist: {
+            src: ['<%= yeoman.dist %>/index.html'],
+            overwrite: true,                 // overwrite matched source files
+            replacements: [{
+              from: /^<!-- replace:dist remove-start -->.*<!-- replace:dist remove-end -->$/g,
+              to: ''
+            }]
+          }
         },
 
         bower: {
@@ -258,6 +280,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('build', [
+        'clean:dist',
         'requirejs',
         'compass:dist',
     //     'useminPrepare',
@@ -267,6 +290,7 @@ module.exports = function(grunt) {
     //     'cssmin',
     //     'uglify',
         'copy',
+        'replace:dist'
     //     'usemin'
     ]);
 
