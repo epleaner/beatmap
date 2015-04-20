@@ -24,13 +24,10 @@ define(function(require) {
         },
 
         initialize: function() {
-
             this.on('start', this._onStart);
         },
 
         _onStart: function() {
-            console.log('application started');
-
             this._showRootLayout();
 
             this.router = new Router();
