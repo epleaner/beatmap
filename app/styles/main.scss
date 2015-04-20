@@ -31,7 +31,7 @@ body {
         margin: 0px 0px 20px 0px;
     }
     background-color: $primary-color;
-    padding: 20px 0px 20px 0px;
+    padding: 20px 0px 45px 0px;
 }
 
 .footer {
@@ -69,15 +69,11 @@ h1 {
     font-weight: 300;
 }
 
-h3 {
+h2, h3 {
     font-weight: 100;
 }
 
-h4 {
-    font-weight: 200;
-}
-
-h5 {
+h4, h5 {
     font-weight: 200;
 }
 
@@ -98,12 +94,17 @@ a:hover {
 }
 
 .search-description-container {
-    .search-description {
-        h6 {
-            text-align: center;
-            padding-top: 10px;
-        }   
+    .search-results-description {
         text-align: center;
+    }
+    .search-instructions {
+        text-align: center;
+    }
+    h4.search-instructions {
+        margin-top: 0px;
+    }
+    h6.search-instructions {
+        font-style: italic;
     }
     height: 40px;
 }
