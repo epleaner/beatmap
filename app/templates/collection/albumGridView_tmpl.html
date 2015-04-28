@@ -1,3 +1,11 @@
+<% if(searchComplete && !noResults) { %>
+<div class="row create-playlist-container">
+	<button type="button" class="btn btn-default create-playlist-button">
+			Create Spotify playlist from results
+	</button>
+</div>
+<% } %>
+
 <div class="row search-results"></div>
 
 <% if(searchComplete && !noResults) { %>

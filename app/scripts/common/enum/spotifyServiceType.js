@@ -1,3 +1,4 @@
 define({
-    Search: 'search'
+    Search: 'search',
+    Albums: 'albums'
 });
