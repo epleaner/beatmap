@@ -1,4 +1,4 @@
-'use strict';
+    'use strict';
 
 module.exports = function(grunt) {
     // load all grunt tasks
@@ -252,11 +252,20 @@ module.exports = function(grunt) {
             src: ['<%= yeoman.dist %>/index.html'],
             overwrite: true,                 // overwrite matched source files
             replacements: [{
-              from: /^<!-- replace:dist remove-start -->.*<!-- replace:dist remove-end -->$/g,
+              from: /^'<!-- replace:dist remove-start -->'.*'<!-- replace:dist remove-end -->'$/g,
               to: ''
             }]
           }
         },
+
+        processhtml: {
+            dist: {
+                process: true,
+              files: {
+                '<%= yeoman.dist %>/index.html': ['<%= yeoman.dist %>/index.html']
+              }
+            }
+          },
 
         bower: {
             all: {
@@ -290,7 +299,7 @@ module.exports = function(grunt) {
     //     'cssmin',
     //     'uglify',
         'copy',
-        'replace:dist'
+        'processhtml:dist'
     //     'usemin'
     ]);
 

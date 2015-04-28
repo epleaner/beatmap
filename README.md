@@ -23,6 +23,8 @@ Built on Backbone.js and Marionette.js
 
 ### TODO
 - [x] Routes/URL hashes
+- [ ] Spotify API
+	- [ ] export search to playlist
 - [ ] Pandora API
 	- [ ] Start radio
 - [ ] Streamus API
@@ -31,8 +33,6 @@ Built on Backbone.js and Marionette.js
 - [ ] Basic UI
 	- [ ] favicon
 	- [x] color scheme
-	- [ ] album details animation
-- [ ] Search by album
 - [ ] Scraping rateyourmusic
 	- [ ] weigh recommendations based on RYM rank
 - [ ] Echonest API
@@ -43,10 +43,9 @@ Built on Backbone.js and Marionette.js
 - [ ] Backend
 	- [ ] local storage and server storage
 	- [ ] making/sharing playlists 
-- [ ] Playlist saving
-	- [ ] echonest/native -> export to lastfm/spotify
 - [ ] Youtube iframe
 
 ### BUGS
-- [ ] Have all links open in new tab/window
 - [ ] Fix touch device album detail behavior
+- [ ] Button UI
+- [ ] 
