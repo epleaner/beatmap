@@ -56,6 +56,12 @@ define(function(require) {
             }
         },
 
+        emptyViewOptions: function() {
+            return {
+                query: this.model.get('searchQuery')
+            };
+        },
+
         onAddChild: function(albumView) {
             if (this.model.get('searchLoading')) {
                 this._doneLoading();

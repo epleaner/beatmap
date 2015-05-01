@@ -37,18 +37,18 @@ define(function(require) {
 
         /* on render callback */
         onRender: function() {
-            console.log('search view rendered');
             this._setupEnterKey();
         },
 
         _triggerSearch: function() {
-            var searchVal = this.ui.searchInput.val();
+            var searchQuery = this.ui.searchInput.val();
             
-            if (searchVal !== '') {
-                this.model.set('query', searchVal);
-                Beatmap.channels.searchBar.vent.trigger('search', searchVal);
+            if (searchQuery !== '') {
+                this.model.set('query', searchQuery);
+                Beatmap.channels.searchBar.vent.trigger('search', searchQuery);
+                Beatmap.searchQuery = searchQuery;
 
-                var urlSearch = searchVal.split(' ').join('+');
+                var urlSearch = searchQuery.split(' ').join('+');
                 Beatmap.router.navigate('#search/' + urlSearch);
             }
         },

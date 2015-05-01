@@ -1,0 +1,106 @@
+@import "variables.scss";
+@import "mixins.scss";
+
+body {
+	color: #555555;
+}
+//	Give all link tags a smooth hover color transition
+a {
+    @include hover-transition;
+    color: #555555;
+}
+//	Make all link tags be same color on hover
+a:hover {
+    color:$link-hover-color !important;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+//	Sticky header
+.header {
+	.nav-bar-container {
+		width: 100%;
+	}
+	position: fixed;
+	  right: 0;
+	  left: 0;
+	  z-index: 1030;
+	  top: 0;
+}
+
+// Custom sticky footer
+.footer {
+    nav {
+        span {
+            a {
+            	//	Make link same color as other text in footer
+                color: #434A54;
+            }
+            @include hover-transition;
+            padding: 0px 5px;
+            // font-weight: 100;
+        }
+        span:hover {
+            text-decoration: underline;
+            cursor: pointer;
+            color:$link-hover-color;
+        }
+        text-align: center;
+        text-transform: uppercase;
+        padding: 9px;
+    }
+    padding: 5px;
+    background-color: #EEEEEE;
+    border-top: 1px solid #e5e5e5;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 50px;
+}
+
+// h1 {
+//     font-weight: 300;
+// }
+
+// h2, h3 {
+//     font-weight: 100;
+// }
+
+// h4, h5 {
+//     font-weight: 200;
+// }
+
+.results-grid-region {
+    .load-more-container {
+		padding-bottom: 60px;
+    }
+}
+
+.search-region {
+	.search-bar-region {
+		margin: 20px 0px;
+	}
+	margin-top: 75px;
+}
+
+.search-buttons-container {
+	padding-bottom: 15px;
+}
+
+.navbar-region {
+	.navbar-logo {
+		width: 50px;
+  		margin: -10px 10px;
+	}
+	.navbar-search {
+		width: 250px;
+	}
+}
+
+//  Controls modal dialog transitions
+.modal.fade:not(.in) .modal-dialog {
+    -webkit-transform: translate3d(0, 125%, 0);
+    transform: translate3d(0, 125%, 0);
+}

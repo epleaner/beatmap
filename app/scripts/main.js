@@ -4,11 +4,17 @@ require.config({
 	baseUrl: '/scripts',
 
 	/* starting point for application */
-	deps: ['bootstrap'],
+	deps: ['bootstrap', 'material'],
 
 	shim: {
 		bootstrap: {
 			deps: ['jquery']
+		},
+		material: {
+			deps: ['bootstrap']
+		},
+		ripples: {
+			deps: ['bootstrap']
 		}
 	},
 
@@ -25,6 +31,10 @@ require.config({
 
 		/* alias the bootstrap js lib */
 		bootstrap: 'vendor/bootstrap',
+		/* alias the bootstrap-material-design js lib */
+		material: '../bower_components/bootstrap-material-design/dist/js/material',
+		/* alias the ripples js lib */
+		ripples: '../bower_components/bootstrap-material-design/dist/js/ripples',
 
 		/* Alias text.js for template loading and shortcut the templates dir to tmpl */
 		text: '../bower_components/requirejs-text/text',

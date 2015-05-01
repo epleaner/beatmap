@@ -1,16 +1,18 @@
 <% if(searchComplete && !noResults) { %>
-<div class="row create-playlist-container">
-	<button type="button" class="btn btn-default create-playlist-button">
-			Create Spotify playlist from results
-	</button>
+<div class="row search-buttons-container text-center">
+	<div class="create-playlist-container">
+		<button type="button" class="btn btn-default create-playlist-button">
+				Create Spotify playlist from results
+		</button>
+	</div>
 </div>
 <% } %>
 
 <div class="row search-results"></div>
 
 <% if(searchComplete && !noResults) { %>
-<div class="row load-more-container">
-	<button type="button" class="btn btn-default load-more-button">
+<div class="row load-more-container text-center">
+	<button type="button" class="btn btn-primary load-more-button">
 			More
 	</button>
 </div>

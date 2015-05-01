@@ -1,0 +1,16 @@
+@import "../bower_components/bootstrap-material-design/sass/material.scss";
+@import "../bower_components/bootstrap-material-design/sass/ripples.scss"; 
+
+/*	This stylesheet imports the bootstrap Material Design theme, and the Ripples theme.
+	It is also used to replace some styling for these themes.
+*/
+
+//	Align bottom of input with button
+.input-group .form-control-wrapper {
+  bottom: -15px;
+}
+
+//	Make search hint a bit easier to see
+.form-control-wrapper .form-control:not(.empty) ~ .floating-label {
+	font-size: 12px;
+}
