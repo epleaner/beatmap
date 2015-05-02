@@ -26,12 +26,10 @@ define(function(require) {
         childViewContainer: '.search-results',
 
         ui: {
-            'loadMore': 'button.load-more-button',
             'createPlaylist': 'button.create-playlist-button'
         },
 
         events: {
-            'click @ui.loadMore': '_loadMore',
             'click @ui.createPlaylist': '_createPlaylist',
         },
 
@@ -71,6 +69,10 @@ define(function(require) {
             albumView.model.getInfo();
         },
 
+        onRender: function() {
+            this._setupScrollEvent();
+        },
+
         /*  Private methods */
 
         _setupAppVentListeners: function() {
@@ -79,6 +81,14 @@ define(function(require) {
             Beatmap.channels.artist.vent.on('showAlbum', this._addAlbumToCollection.bind(this));
 
             Beatmap.channels.artist.vent.on('getSimilarArtistError', this._onNoResults.bind(this));
+        },
+
+        _setupScrollEvent: function() {
+            $(window).scroll(function () { 
+                if ($(window).scrollTop() + $(window).height() === $(document).height()) {
+                    this._loadMore();
+                }
+          }.bind(this));
         },
 
         //  When a model has an album ready to be shown, add it to the collection

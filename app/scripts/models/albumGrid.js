@@ -22,8 +22,8 @@ define(function(require) {
             };
         },
 
-        _initialAlbumCount: 16,
-        _loadMoreCount: 16,
+        _initialAlbumCount: 18,
+        _loadMoreCount: 12,
         _availableArtists: undefined,
 
         _setupAppVentListeners: function() {

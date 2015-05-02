@@ -32,11 +32,33 @@ define(function(require) {
         /* on render callback */
         onRender: function() {
             this._setupEnterKey();
+            this._setupScrollEvent();
+
+            this.ui.search.hide();
         },
 
         _setupAppVentListeners: function() {
             Beatmap.channels.router.vent.on('search', this._setSearchVal.bind(this));
             Beatmap.channels.searchBar.vent.on('search', this._setSearchVal.bind(this));
+        },
+
+        _setupEnterKey: function() {
+            this.ui.search.keyup(function(event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    this._triggerSearch();
+                }
+            }.bind(this));
+        },
+
+        _setupScrollEvent: function() {
+            $(window).scroll(function () { 
+                if ($(window).scrollTop() > 300) {
+                    this.ui.search.show({duration: 200, easing: 'swing'});
+                } else {
+                    this.ui.search.hide({duration: 200, easing: 'swing'});
+                }
+          }.bind(this));
         },
 
         _setSearchVal: function(searchVal) {
@@ -47,15 +69,6 @@ define(function(require) {
             var searchQuery = this.ui.search.val();
             this._setSearchVal(searchQuery);
             Beatmap.channels.router.vent.trigger('search', searchQuery);
-        },
-
-        _setupEnterKey: function() {
-            this.ui.search.keyup(function(event) {
-                if (event.keyCode === 13) {
-                    event.preventDefault();
-                    this._triggerSearch();
-                }
-            }.bind(this));
         },
     });
 });
