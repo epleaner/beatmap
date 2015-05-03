@@ -106,7 +106,9 @@ h4, h5 {
 }
 
 //  Controls modal dialog transitions
-.modal.fade:not(.in) .modal-dialog {
-    -webkit-transform: translate3d(0, 125%, 0);
-    transform: translate3d(0, 125%, 0);
+.modal.fade:not(.in) {
+ 	.modal-dialog.slide-bottom {
+	    -webkit-transform: translate3d(0, 125%, 0);
+	    transform: translate3d(0, 125%, 0);
+	}
 }

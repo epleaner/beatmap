@@ -63,6 +63,8 @@ define(function(require) {
         onAddChild: function(albumView) {
             if (this.model.get('searchLoading')) {
                 this._doneLoading();
+            } else if(this.collection.length === 3) {
+                this._scrollToResults();
             }
 
             //  get more detailed info for album being shown
@@ -83,10 +85,13 @@ define(function(require) {
             Beatmap.channels.artist.vent.on('getSimilarArtistError', this._onNoResults.bind(this));
         },
 
+        //  Setup infinite scroll
         _setupScrollEvent: function() {
             $(window).scroll(function () { 
                 if ($(window).scrollTop() + $(window).height() === $(document).height()) {
-                    this._loadMore();
+                    if(this.collection.length) {
+                        this._loadMore();
+                    }
                 }
           }.bind(this));
         },
@@ -168,6 +173,12 @@ define(function(require) {
         _doneLoading: function() {
             this.model.set('searchLoading', false);
             this.model.set('searchComplete', true);
+        },
+
+        _scrollToResults: function() {
+            $(('html,body')).animate({
+                scrollTop: '325'
+            }, 750);
         }
     });
 

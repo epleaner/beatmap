@@ -68,7 +68,7 @@ define(function(require) {
 
         _setSearchVal: function(searchVal) {
             this.model.set('query', searchVal);
-        },
+        }
 
     });
 });

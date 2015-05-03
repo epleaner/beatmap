@@ -74,7 +74,12 @@ define(function(require) {
             },
 
             _showNavBar: function() {
-                this.getRegion('navBar').show(new NavBarView());
+                var navBarView = new NavBarView();
+
+                //  nav bar and root layout share the same dialogs region
+                navBarView.regionManager.addRegion('dialogs', this.getRegion('dialogs'));
+
+                this.getRegion('navBar').show(navBarView);
             },
             
             _showSearchBar: function() {
