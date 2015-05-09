@@ -4,11 +4,12 @@ define(function(require) {
     var LoadingView = require('views/item/loadingView');
     var NoResultsView = require('views/item/noResultsView');
     var AlbumView = require('views/item/albumView');
-    // var AlbumGrid = require('models/albumGrid');
+
     var AlbumCollection = require('collections/albumCollection');
     var AlbumGridTemplate = require('text!tmpl/collection/albumGridView_tmpl.html');
 
     var LastfmAPI = require('models/api/lastfmAPI');
+    var SpotifyAPI = require('models/api/spotifyAPI');
 
     /* Return a ItemView class definition */
     return Backbone.Marionette.CompositeView.extend({
@@ -25,11 +26,11 @@ define(function(require) {
         childViewContainer: '.search-results',
 
         ui: {
-            'loadMore': 'button.load-more-button'
+            'createPlaylist': 'button.create-playlist-button'
         },
 
         events: {
-            'click @ui.loadMore': '_loadMore',
+            'click @ui.createPlaylist': '_createPlaylist',
         },
 
         modelEvents: {
@@ -53,13 +54,25 @@ define(function(require) {
             }
         },
 
+        emptyViewOptions: function() {
+            return {
+                query: this.model.get('searchQuery')
+            };
+        },
+
         onAddChild: function(albumView) {
             if (this.model.get('searchLoading')) {
                 this._doneLoading();
+            } else if(this.collection.length === 3) {
+                this._scrollToResults();
             }
 
             //  get more detailed info for album being shown
             albumView.model.getInfo();
+        },
+
+        onRender: function() {
+            this._setupScrollEvent();
         },
 
         /*  Private methods */
@@ -70,6 +83,17 @@ define(function(require) {
             Beatmap.channels.artist.vent.on('showAlbum', this._addAlbumToCollection.bind(this));
 
             Beatmap.channels.artist.vent.on('getSimilarArtistError', this._onNoResults.bind(this));
+        },
+
+        //  Setup infinite scroll
+        _setupScrollEvent: function() {
+            $(window).scroll(function () { 
+                if ($(window).scrollTop() + $(window).height() === $(document).height()) {
+                    if(this.collection.length) {
+                        this._loadMore();
+                    }
+                }
+          }.bind(this));
         },
 
         //  When a model has an album ready to be shown, add it to the collection
@@ -86,6 +110,43 @@ define(function(require) {
 
         _loadMore: function() {
             this.model.loadMore();
+        },
+
+        _createPlaylist: function() {
+            var spotifyAlbums = _.filter(this.collection.models, 
+                function(album) { 
+                    return album.get('spotifyID') !== ''; 
+                }
+            );
+
+            var spotifyIDs = _.map(spotifyAlbums, 
+                function(album) { 
+                    return album.get('spotifyID'); 
+                } 
+            );
+
+            var deferreds = [];
+            var allTracks = [];
+
+            _.each(spotifyIDs, function(id) {
+                deferreds.push(SpotifyAPI.getAlbumTracks({
+                    id: id,
+                    success: function(tracks) {
+                        allTracks.push(tracks);
+                    },
+                    error: function() {console.log('error getting tracks for id', id);},
+                    complete: function() {},
+                    ajaxDataOptions: {}
+                }));
+            });
+
+            $.when.apply($,deferreds).then(
+                function () { 
+                    allTracks = _.flatten(allTracks);
+                    console.log('all spotify tracks for search results retrieved!');
+                }
+            );
+
         },
 
         _onNoResults: function(response) {
@@ -112,6 +173,12 @@ define(function(require) {
         _doneLoading: function() {
             this.model.set('searchLoading', false);
             this.model.set('searchComplete', true);
+        },
+
+        _scrollToResults: function() {
+            $(('html,body')).animate({
+                scrollTop: '325'
+            }, 750);
         }
     });
 

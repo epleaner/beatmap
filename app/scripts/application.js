@@ -48,5 +48,8 @@ define(function(require) {
         var beatmap = new Application();
         window.Beatmap = beatmap;
         Beatmap.start();
+
+        //  start material javascript which adds functionality to bootstrap-material-design
+        $.material.init();
     });
 });

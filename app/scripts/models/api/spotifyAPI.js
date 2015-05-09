@@ -16,6 +16,17 @@ define(function(require) {
             }, _.extend(options.ajaxDataOptions, {type: 'album'}));
         },
 
+        getAlbumTracks: function(options) {
+            return this._doRequest(SpotifyServiceType.Albums + '/' + options.id + '/tracks', {
+                success: function(response) {
+                    var tracks = response.items;
+                    options.success(tracks);
+                },
+                error: options.error,
+                complete: options.complete
+            }, _.extend(options.ajaxDataOptions));
+        },
+
         //  serviceType: the method or endpoint on the server you want to call
         //  ajaxOptions: options specifically for ajax, typically success/error callbacks 
         //  ajaxDataOptions: options passed along to the endpoint, for the API

@@ -5,7 +5,7 @@ define(function(require) {
 
     // todo: these should be stored somewhere better maybe?
     var defaultLastfmAlbumArtwork = 'http://cdn.last.fm/flatness/catalogue/noimage/2/default_album_medium.png';
-    var defaultLocalAlbumArtwork = 'images/blankalbumart.png';
+    var defaultLocalAlbumArtwork = 'images/logo.png';
     var youtubeSearchBase = 'https://www.youtube.com/results?search_query=';
     var groovesharkSearchBase = 'http://grooveshark.com/#!/search/album?q=';
 
@@ -18,7 +18,7 @@ define(function(require) {
         },
 
         defaults: {
-            artworkUrl: 'images/blankalbumart.png',
+            artworkUrl: defaultLocalAlbumArtwork,
             artist: {
                 name: 'Artist name unknown'
             },
@@ -67,7 +67,7 @@ define(function(require) {
             //  album already has an artist object property
             //  that has more than what the response gives,
             //  so don't set the response's artist
-            delete response.artist;
+            if(response && response.artist) {delete response.artist;}
 
             this.set(response);
             

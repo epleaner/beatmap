@@ -7,8 +7,8 @@ define(function(require) {
 	return Backbone.Marionette.ItemView.extend({
     	template: _.template(NoResultsViewTemplate),
 
-    	initialize: function() {
-    		this.model.set('searchVal', Beatmap.gridSearchVal);
+    	initialize: function(options) {
+    		this.model.set('query', options.query);
     	}
 	});
 

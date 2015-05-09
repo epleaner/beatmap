@@ -4,6 +4,7 @@ define(function(require) {
         var RootModel = require('models/root');
         var AlbumGridModel = require('models/albumGrid');
 
+        var NavBarView = require('views/item/navBar');
         var SearchBarView = require('views/item/searchBarView');
         var InfoView = require('views/item/infoView');
         var AlbumGridView = require('views/collection/AlbumGridView');
@@ -23,6 +24,7 @@ define(function(require) {
 
             /* Layout sub regions */
             regions: {
+                navBar: '.nav-bar-region',
                 searchBar: '.search-bar-region',
                 resultsGrid: '.results-grid-region',
                 dialogs: '.dialogs-region',
@@ -60,6 +62,7 @@ define(function(require) {
             },
 
             _showRegionViews: function() {
+                this._showNavBar();
                 this._showSearchBar();
                 this._showInfo();
                 this._showResultsGrid();
@@ -69,11 +72,21 @@ define(function(require) {
             _setupAppVentListeners: function() {
                 Beatmap.channels.searchBar.vent.on('search', this._onSearch.bind(this));
             },
+
+            _showNavBar: function() {
+                var navBarView = new NavBarView();
+
+                //  nav bar and root layout share the same dialogs region
+                navBarView.regionManager.addRegion('dialogs', this.getRegion('dialogs'));
+
+                this.getRegion('navBar').show(navBarView);
+            },
             
             _showSearchBar: function() {
                 this.getRegion('searchBar').show(new SearchBarView());
             },
 
+            //  InfoView shares models with the album grid
             _showInfo: function() {
                 this.getRegion('info').show(new InfoView({
                     model: this.model.get('gridModel')

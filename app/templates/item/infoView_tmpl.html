@@ -1,21 +1,22 @@
-
 <div class="row search-description-container">
-	<% if(searchComplete && !noResults) { %>
+	
+	<% if(searchLoading) { %>
+	<h3 class="text-center">
+		Searching...
+	</h3>
+	<% } else if(searchComplete && !noResults) { %>
 
-	<h4 class="search-results-description">
+	<h3 class="search-results-description text-center">
 		Showing results for <% if(albumResults) { %>
 		the album "<span class="text-capitalize"><%= searchAlbum.get('name') %></span>" by <span class="text-capitalize"><%= searchArtist.get('name') %></span>
 		<% } else { %>
 		the artist "<span class="text-capitalize"><%= searchArtist.get('name') %><span class="text-capitalize">"
 		<% } %>
-	</h4>
+	</h3>
 
 	<% } else if(!noResults) { %>
 	
-	<h4 class="search-instructions">
-		<%= Beatmap.strings.searchInfo %>
-		<h6 class="search-instructions"><%= Beatmap.strings.searchAlbumInstructions %></h6>
-	</h4>
+	<h3 class="text-center"><%= Beatmap.strings.searchInfo %></h3>
 	<% } %>
 
 </div>

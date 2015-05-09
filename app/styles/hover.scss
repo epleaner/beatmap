@@ -1,7 +1,6 @@
 @import "variables.scss";
 @import "mixins.scss";
     
-
     @font-face {
         font-weight: normal;
         font-style: normal;
@@ -25,7 +24,7 @@
         /*max-height: 360px;*/
         
         width: 100%;
-        background: #000000;
+        // background: #000000;
         text-align: center;
     }
     .grid figure img {
@@ -38,7 +37,7 @@
     .grid figure figcaption {
         padding: 2em;
         color: #fff;
-        opacity: .8;
+        opacity: .9;
         /*text-transform: uppercase;*/
         
         -webkit-backface-visibility: hidden;
