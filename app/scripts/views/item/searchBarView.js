@@ -38,10 +38,11 @@ define(function(require) {
         /* on render callback */
         onRender: function() {
             this._setupEnterKey();
+            this._preventButtonFocus();
         },
 
         _triggerSearch: function() {
-            var searchQuery = this.ui.searchInput.val();
+            var searchQuery = this.ui.searchInput.val().trim();
             
             if (searchQuery !== '') {
                 this.model.set('query', searchQuery);
@@ -64,6 +65,14 @@ define(function(require) {
                     this.ui.searchButton.click();
                 }
             }.bind(this));
+        },
+
+        //  http://stackoverflow.com/questions/23443579/how-to-stop-buttons-from-staying-depressed-with-bootstrap-3
+        //  This stops button from staying focused, which causes style issues
+        _preventButtonFocus: function() {
+            this.ui.searchButton.mouseup(function(){
+                $(this).blur();
+            });
         },
 
         _setSearchVal: function(searchVal) {

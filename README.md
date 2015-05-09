@@ -18,7 +18,6 @@ Built on Backbone.js and Marionette.js
 - [x] Last.fm
 - [x] Spotify
 - [x] YouTube
-- [x] Grooveshark
 
 
 ### TODO
@@ -29,10 +28,7 @@ Built on Backbone.js and Marionette.js
 	- [ ] Start radio
 - [ ] Streamus API
 	- [ ] Add songs to queue
-- [ ] Infinite Scroll
-- [ ] Basic UI
-	- [ ] favicon
-	- [x] color scheme
+- [x] Infinite Scroll
 - [ ] Scraping rateyourmusic
 	- [ ] weigh recommendations based on RYM rank
 - [ ] Echonest API
@@ -44,8 +40,3 @@ Built on Backbone.js and Marionette.js
 	- [ ] local storage and server storage
 	- [ ] making/sharing playlists 
 - [ ] Youtube iframe
-
-### BUGS
-- [ ] Fix touch device album detail behavior
-- [ ] Button UI
-- [ ] 

@@ -14,7 +14,8 @@ define(function(require) {
     	/* ui selector cache */
     	ui: {
     		'caption': 'figcaption',
-    		'details': '.details'
+    		'details': '.details',
+    		'links': 'a'
     	},
 
 		/* Ui events hash */
@@ -29,11 +30,17 @@ define(function(require) {
 
 		/* on render callback */
 		onRender: function() {
+			this._stopPropagation();
 		},
 
 		_showDetails: function() {
 			this.ui.caption.toggleClass('full-height');
-			this.ui.details.toggleClass('hidden');
+		},
+
+		_stopPropagation: function() {
+			this.ui.links.click(function(event) { 
+				event.stopPropagation(); 
+			});
 		}
 	});
 
