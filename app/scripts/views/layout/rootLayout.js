@@ -8,6 +8,7 @@ define(function(require) {
         var SearchBarView = require('views/item/searchBarView');
         var InfoView = require('views/item/infoView');
         var AlbumGridView = require('views/collection/AlbumGridView');
+        var SpotifyPlayerView = require('views/item/SpotifyPlayerView');
 
         var RootLayoutTemplate = require('text!tmpl/layout/rootLayout_tmpl.html');
 
@@ -28,7 +29,8 @@ define(function(require) {
                 searchBar: '.search-bar-region',
                 resultsGrid: '.results-grid-region',
                 dialogs: '.dialogs-region',
-                info: '.info-region'
+                info: '.info-region',
+                spotifyPlayer: '.spotify-player-region'
             },
 
             /* ui selector cache */
@@ -66,6 +68,7 @@ define(function(require) {
                 this._showSearchBar();
                 this._showInfo();
                 this._showResultsGrid();
+                this._showSpotifyPlayer();
             },
 
             /* Private methods */
@@ -91,6 +94,10 @@ define(function(require) {
                 this.getRegion('info').show(new InfoView({
                     model: this.model.get('gridModel')
                 }));
+            },
+
+            _showSpotifyPlayer: function() {
+                this.getRegion('spotifyPlayer').show(new SpotifyPlayerView());
             },
 
             _showResultsGrid: function() {

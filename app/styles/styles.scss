@@ -60,6 +60,17 @@ a:hover {
     height: 50px;
 }
 
+.spotify-player-region {
+    .spotify-player-iframe {
+        width: 300px;
+        height: 380px;
+    }
+    position: absolute;
+    bottom: 65px;
+    right: 5px;
+}
+
+
 h1 {
     font-weight: 300;
 }
