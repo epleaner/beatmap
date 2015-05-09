@@ -113,13 +113,19 @@
     }
     figure.effect-zoe figcaption.full-height {
         height: 100%;
-        -webkit-transition: -webkit-transform 0.35s;
-        transition: transform 0.35s;
+    }
+
+    figure.effect-zoe figcaption{
+        -webkit-transition: all 0.35s ease;
+        -moz-transition: all 0.35s ease;
+        -o-transition: all 0.35s ease;
+        transition: all 0.35s ease;
     }
     figure.effect-zoe figcaption .details {
         clear: both;
         float: left;
         text-align: left;
+        margin-top: 5px;
     }
     figure.effect-zoe h5 {
         float: left;
@@ -156,6 +162,14 @@
         -webkit-transform: translate3d(0, 200%, 0);
         transform: translate3d(0, 200%, 0);
     }
+
+    figure.effect-zoe .details {
+        -webkit-transition: -webkit-transform .5s;
+        transition: transform .5s;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+    }
+
     figure.effect-zoe p.icon-links a span::before {
         display: inline-block;
         padding: 8px 10px;
@@ -180,6 +194,11 @@
         opacity: 1;
     }
     figure.effect-zoe:hover figcaption, figure.effect-zoe:hover h5, figure.effect-zoe:hover p.icon-links a {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    figure.effect-zoe:hover .details {
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
     }

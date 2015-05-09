@@ -35,7 +35,6 @@ define(function(require) {
 
 		_showDetails: function() {
 			this.ui.caption.toggleClass('full-height');
-			this.ui.details.toggleClass('hidden');
 		},
 
 		_stopPropagation: function() {
