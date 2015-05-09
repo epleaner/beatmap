@@ -14,6 +14,8 @@ define(function(require) {
         var AboutModal = require('views/item/dialogs/aboutModal');
         var ContactModal = require('views/item/dialogs/contactModal');
 
+        var DialogsRegion = require('regions/dialogsRegion');
+
         /* Return a Layout class definition */
         return Backbone.Marionette.LayoutView.extend({
             model: new RootModel(),
@@ -27,12 +29,14 @@ define(function(require) {
                 navBar: '.nav-bar-region',
                 searchBar: '.search-bar-region',
                 resultsGrid: '.results-grid-region',
-                dialogs: '.dialogs-region',
-                info: '.info-region'
+                // dialogs: '.dialogs-region',
+                info: '.info-region',
+
             },
 
             /* ui selector cache */
             ui: {
+                'footerNav': 'footer nav',
                 'about': 'footer nav .about',
                 'contact': 'footer nav .contact'
             },
@@ -40,12 +44,16 @@ define(function(require) {
             /* Ui events hash */
             events: {
                 'click @ui.about': '_showAboutModal',
-                'click @ui.contact': '_showContactModal'
+                'click @ui.contact': '_showContactModal',
             },
 
             initialize: function() {
                 this.model.set('gridModel', new AlbumGridModel());
                 this.model.get('gridModel').on('change', this._onGridChange.bind(this));
+
+                this.addRegions({
+                  dialogs: DialogsRegion
+                });
             },
 
             onBeforeRender: function() {
@@ -101,7 +109,6 @@ define(function(require) {
             
             _onSearch: function(searchVal) {
                 Beatmap.gridSearchVal = searchVal;
-                console.log('searching for', searchVal);
             },
 
             _showAboutModal: function() {

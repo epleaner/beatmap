@@ -30,7 +30,7 @@ define(function(require) {
             help: '.navbar-help',
             spotifyLogin: '.spotify-login',
             collapseToggle: '.navbar-toggle',
-            collapse: '.navbar-collapse'
+            collapse: '.navbar-collapse',
             // lastfmLogin: '.lastfm-login'
         },
 
@@ -93,18 +93,24 @@ define(function(require) {
             Beatmap.channels.router.vent.trigger('search', searchQuery);
         },
 
-        _openHelpModal: function() {
+        _openHelpModal: function(event) {
+            event.preventDefault();
+
             this.getRegion('dialogs').show(new HelpModal());
         },
 
-        _openSpotifyLoginModal: function() {
+        _openSpotifyLoginModal: function(event) {
+            event.preventDefault();
+
             this.getRegion('dialogs').show(new SpotifyLoginModal());
         },
 
         _toggleCollapse: function() {
-            this.ui.collapse.is(':visible') ? this.ui.collapse.slideUp(100) : this.ui.collapse.slideDown(100, function() {
-                this.ui.search.show(0);
-            }.bind(this));
+            this.ui.collapse.is(':visible') ? 
+                this.ui.collapse.slideUp(100) : 
+                this.ui.collapse.slideDown(100, function() {
+                    this.ui.search.show(0);
+                }.bind(this));
 
             this.model.set('collapsed', !this.model.get('collapsed'));
         }

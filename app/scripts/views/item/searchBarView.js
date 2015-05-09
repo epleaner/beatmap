@@ -42,7 +42,7 @@ define(function(require) {
         },
 
         _triggerSearch: function() {
-            var searchQuery = this.ui.searchInput.val();
+            var searchQuery = this.ui.searchInput.val().trim();
             
             if (searchQuery !== '') {
                 this.model.set('query', searchQuery);
