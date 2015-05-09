@@ -73,6 +73,7 @@ define(function(require) {
 
         onRender: function() {
             this._setupScrollEvent();
+            this._preventButtonFocus();
         },
 
         /*  Private methods */
@@ -94,6 +95,14 @@ define(function(require) {
                     }
                 }
           }.bind(this));
+        },
+
+        //  http://stackoverflow.com/questions/23443579/how-to-stop-buttons-from-staying-depressed-with-bootstrap-3
+        //  This stops the button from staying focused, which causes style issues
+        _preventButtonFocus: function() {
+            this.ui.createPlaylist.mouseup(function(){
+                $(this).blur();
+            });
         },
 
         //  When a model has an album ready to be shown, add it to the collection
