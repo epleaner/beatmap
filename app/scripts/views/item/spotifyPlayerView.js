@@ -8,27 +8,31 @@ define(function(require) {
     return Backbone.Marionette.ItemView.extend({
         initialize: function() {
             this.model = new SpotifyPlayer();
-            this._setupAppVentListeners();
         },
 
         template: _.template(SpotifyPlayerTemplate),
 
-        /* ui selector cache */
-        ui: {
-        },
+        templateHelpers: function() {
+            return {
+                getSrc: function() {
+                    // janky...
+                    var src = this.source + 
+                        this.type + 
+                        ':' + 
+                        this.title + 
+                        ':' + 
+                        this.data;
 
-        /* Ui events hash */
-        events: {
+                    console.log(src);
+
+                    return src;
+                }
+
+            };
         },
 
         modelEvents: {
-        },
-
-        /* on render callback */
-        onRender: function() {
-        },
-
-        _setupAppVentListeners: function() {
+            'change': 'render'
         }
     });
 });

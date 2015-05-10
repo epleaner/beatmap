@@ -9,7 +9,6 @@ define(function(require) {
     var AlbumGridTemplate = require('text!tmpl/collection/albumGridView_tmpl.html');
 
     var LastfmAPI = require('models/api/lastfmAPI');
-    var SpotifyAPI = require('models/api/spotifyAPI');
 
     /* Return a ItemView class definition */
     return Backbone.Marionette.CompositeView.extend({
@@ -113,40 +112,7 @@ define(function(require) {
         },
 
         _createPlaylist: function() {
-            var spotifyAlbums = _.filter(this.collection.models, 
-                function(album) { 
-                    return album.get('spotifyID') !== ''; 
-                }
-            );
-
-            var spotifyIDs = _.map(spotifyAlbums, 
-                function(album) { 
-                    return album.get('spotifyID'); 
-                } 
-            );
-
-            var deferreds = [];
-            var allTracks = [];
-
-            _.each(spotifyIDs, function(id) {
-                deferreds.push(SpotifyAPI.getAlbumTracks({
-                    id: id,
-                    success: function(tracks) {
-                        allTracks.push(tracks);
-                    },
-                    error: function() {console.log('error getting tracks for id', id);},
-                    complete: function() {},
-                    ajaxDataOptions: {}
-                }));
-            });
-
-            $.when.apply($,deferreds).then(
-                function () { 
-                    allTracks = _.flatten(allTracks);
-                    console.log('all spotify tracks for search results retrieved!');
-                }
-            );
-
+            this.model.createPlaylist(this.collection.models);
         },
 
         _onNoResults: function(response) {

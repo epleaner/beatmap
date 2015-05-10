@@ -4,6 +4,8 @@ define(function(require) {
     var Artist = require('models/artist');
     var Album = require('models/album');
 
+    var SpotifyAPI = require('models/api/spotifyAPI');
+
     /* Return a model class definition */
     return Backbone.Model.extend({
         initialize: function() {
@@ -70,6 +72,50 @@ define(function(require) {
 
             this.set('searchAlbum', album);
             this._artistSearch(query[1]);
+        },
+
+        //  Creates a playlist exportable to Spotify.
+        //  Filters only tracks with spotify ID.
+        //  Collects the IDs, and gets tracks for albums.
+        //  On success, collect all IDs into one collection
+        //  Trigger it ready.
+        createPlaylist: function(collection) {
+            var spotifyAlbums = _.filter(collection, 
+                function(album) { 
+                    return album.get('spotifyID') !== ''; 
+                }
+            );
+
+            var spotifyIDs = _.map(spotifyAlbums, 
+                function(album) { 
+                    return album.get('spotifyID'); 
+                } 
+            );
+
+            var deferreds = [];
+            var allTracks = [];
+
+            _.each(spotifyIDs, function(id) {
+                deferreds.push(SpotifyAPI.getAlbumTracks({
+                    id: id,
+                    success: function(tracks) {
+                        allTracks.push(tracks);
+                    },
+                    error: function() {console.log('error getting tracks for id', id);},
+                }));
+            });
+
+            $.when.apply($,deferreds).then(
+                function () { 
+                    allTracks = _.flatten(allTracks);
+                    var shuffledTrackIds = _.shuffle(allTracks);
+                    var fewTracksIds = _.first(shuffledTrackIds, 25);
+                    var joinedTrackIds = _.pluck(fewTracksIds, 'id').join(',');
+
+                    Beatmap.channels.albumGrid.vent.trigger('playlistReady', joinedTrackIds);
+                }
+            );
+
         },
 
         _onGetSimilarArtistsSuccess: function() {
