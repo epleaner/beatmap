@@ -21,7 +21,11 @@ define(function(require) {
                         ':' + 
                         this.title + 
                         ':' + 
-                        this.data;
+                        this.data +
+                        '&theme=' +
+                        this.theme +
+                        '&view=' +
+                        this.view;
 
                     console.log(src);
 

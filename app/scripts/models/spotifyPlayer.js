@@ -5,9 +5,11 @@ define(function() {
 		defaults: {
 			source: 'https://embed.spotify.com/?uri=spotify:',
 			width: 300,
-			height: 380,
+			height: 80,
 			type: 'trackset',
-			title: 'PREFEREDTITLE',
+			title: 'Related Artists',
+			theme: 'white',
+			view: 'list',
 			data: ''
 		},
 
@@ -21,6 +23,7 @@ define(function() {
         },
 
         _setData: function(data) {
+        	this.set('height', 380);
         	this.set('data', data);
         }
 	});
