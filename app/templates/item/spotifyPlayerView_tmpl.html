@@ -1,1 +1,3 @@
-<iframe class="spotify-player-iframe" src="<%- getSrc() %>" width="<%= width %>" height="<%= height %>" frameborder="0" allowtransparency="true"></iframe>
+<div class="spotify-player-container <%= isHidden() %>">
+	<iframe class="spotify-player-iframe" src="<%- getSrc() %>" width="<%= width %>" height="<%= height %>" frameborder="0" allowtransparency="true"></iframe>
+</div>

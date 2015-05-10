@@ -12,6 +12,11 @@ define(function(require) {
 
         template: _.template(SpotifyPlayerTemplate),
 
+        ui: {
+            'iframeContainer': '.iframe-container',
+            'iframe': 'iframe'
+        },
+
         templateHelpers: function() {
             return {
                 getSrc: function() {
@@ -30,13 +35,16 @@ define(function(require) {
                     console.log(src);
 
                     return src;
-                }
+                },
 
+                isHidden: function() {
+                    return this.playlistReady ? '' : 'hidden';
+                }
             };
         },
 
         modelEvents: {
-            'change': 'render'
-        }
+            'change': 'render',
+        },
     });
 });

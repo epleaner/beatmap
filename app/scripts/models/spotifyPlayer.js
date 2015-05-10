@@ -10,7 +10,8 @@ define(function() {
 			title: 'Related Artists',
 			theme: 'white',
 			view: 'list',
-			data: ''
+			data: '',
+			playlistReady: false
 		},
 
 		initialize: function() {
@@ -25,6 +26,7 @@ define(function() {
         _setData: function(data) {
         	this.set('height', 380);
         	this.set('data', data);
+        	this.set('playlistReady', true);
         }
 	});
 
