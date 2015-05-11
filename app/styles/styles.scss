@@ -75,12 +75,15 @@ footer:hover {
 }
 
 .spotify-player-region {
+    .spotify-player-toggle {
+        bottom: 35px;
+    }
     .spotify-player-iframe {
         // width: 300px;
         // height: 380px;
     }
     position: absolute;
-    bottom: 0px;
+    bottom: -20px;
     right: 5px;
 }
 
