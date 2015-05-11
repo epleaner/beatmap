@@ -1,6 +1,10 @@
 define(function(require) {
     'use strict';
 
+    var expandedHeight = 290;
+    var shrunkHeight = 80;
+    var playerWidth = 210;
+
     var SpotifyPlayerTemplate = require('text!tmpl/item/spotifyPlayerView_tmpl.html');
     var SpotifyPlayer = require('models/spotifyPlayer');
 
@@ -11,11 +15,6 @@ define(function(require) {
         },
 
         template: _.template(SpotifyPlayerTemplate),
-
-        ui: {
-            'iframeContainer': '.iframe-container',
-            'iframe': 'iframe'
-        },
 
         templateHelpers: function() {
             return {
@@ -37,14 +36,62 @@ define(function(require) {
                     return src;
                 },
 
+                getWidth: function() {
+                    return playerWidth;
+                },
+
+                getHeight: function() {
+                    return this.isExpanded ? expandedHeight : shrunkHeight;
+                },
+
                 isHidden: function() {
                     return this.playlistReady ? '' : 'hidden';
+                },
+
+                getButtonLabel: function() {
+                    return this.isExpanded ? 'Hide' : 'Show';
                 }
             };
         },
 
-        modelEvents: {
-            'change': 'render',
+        ui: {
+            'iframeContainer': '.iframe-container',
+            'iframe': 'iframe',
+            'toggle': '.spotify-player-toggle'
         },
+
+        events: {
+            'click @ui.toggle': '_togglePlayer'
+        },
+
+        modelEvents: {
+            'change:source': 'render',
+            'change:type': 'render',
+            'change:title': 'render',
+            'change:view': 'render',
+            'change:data': 'render',
+            'change:playlistReady': '_onChangePlaylistReady'
+        },
+
+        _onChangePlaylistReady: function(model, ready){
+            this.render();
+            ready ? this._expand() : this._shrink();
+        },
+
+        _togglePlayer: function() {
+            this.model.get('isExpanded') ? this._shrink() : this._expand();
+        },
+
+        _shrink: function() {
+            this.ui.iframe.height(shrunkHeight);
+            this.ui.toggle.text('Show');
+            this.model.set('isExpanded', false);
+        },
+
+        _expand: function() {
+            this.ui.iframe.height(expandedHeight);
+            this.ui.toggle.text('Hide');
+            this.model.set('isExpanded', true);
+        }
     });
 });

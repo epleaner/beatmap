@@ -1,3 +1,4 @@
 <div class="spotify-player-container <%= isHidden() %>">
-	<iframe class="spotify-player-iframe" src="<%- getSrc() %>" width="<%= width %>" height="<%= height %>" frameborder="0" allowtransparency="true"></iframe>
+	<button type="button" class="btn btn-small spotify-player-toggle"><%= getButtonLabel() %></button>
+	<iframe class="spotify-player-iframe" src="<%- getSrc() %>" width="<%= getWidth() %>" height="<%= getHeight() %>" frameborder="0" allowtransparency="true"></iframe>
 </div>

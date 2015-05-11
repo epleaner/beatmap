@@ -4,14 +4,13 @@ define(function() {
 	var SpotifyPlayer = Backbone.Model.extend({
 		defaults: {
 			source: 'https://embed.spotify.com/?uri=spotify:',
-			width: 300,
-			height: 80,
 			type: 'trackset',
 			title: 'Related Artists',
 			theme: 'white',
 			view: 'list',
 			data: '',
-			playlistReady: false
+			playlistReady: false,
+			isExpanded: false
 		},
 
 		initialize: function() {
@@ -24,10 +23,9 @@ define(function() {
         },
 
         _setData: function(data) {
-        	this.set('height', 380);
         	this.set('data', data);
         	this.set('playlistReady', true);
-        }
+        },
 	});
 
 	return SpotifyPlayer;
