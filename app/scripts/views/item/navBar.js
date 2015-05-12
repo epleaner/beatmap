@@ -47,7 +47,8 @@ define(function(require) {
         /* on render callback */
         onRender: function() {
             this._setupEnterKey();
-            this._setupScrollEvent();
+            this._setupSearchScrollEvent();
+            this._setupHideScrollEvent();
 
             this.ui.search.hide();
         },
@@ -69,7 +70,7 @@ define(function(require) {
         //  Handles hiding/showing search in top bar.
         //  Only toggles hiding/showing if navbar is collapsed or collapse toggle is not visible,
         //  Which happens for non-mobile/tablets.
-        _setupScrollEvent: function() {
+        _setupSearchScrollEvent: function() {
             $(window).scroll(function () {
                 //  
                 if(this.model.get('collapsed') || !this.ui.collapseToggle.is(':visible')) {
@@ -81,6 +82,49 @@ define(function(require) {
                 }
                 
           }.bind(this));
+        },
+
+        _setupHideScrollEvent: function() {
+            var didScroll;
+            var lastScrollTop = 0;
+            var delta = 5;
+            var navbarHeight = $('header').outerHeight();
+
+            var _hasScrolled = function() {
+                var st = $(window).scrollTop();
+        
+                // Make sure they scroll more than delta
+                if(Math.abs(lastScrollTop - st) <= delta) {
+                    return;
+                }
+                
+                // If they scrolled down and are past the navbar, add class .nav-up.
+                // This is necessary so you never see what is "behind" the navbar.
+                if (st > lastScrollTop && st > navbarHeight){
+                    // Scroll Down
+                    $('header').addClass('header-hidden');
+                    $('footer').addClass('footer-hidden');
+                } else {
+                    // Scroll Up
+                    if(st + $(window).height() < $(document).height()) {
+                        $('header').removeClass('header-hidden');
+                        $('footer').removeClass('footer-hidden');
+                    }
+                }
+                
+                lastScrollTop = st;
+            };
+
+            $(window).scroll(function(){
+                didScroll = true;
+            });
+
+            setInterval(function() {
+                if (didScroll) {
+                    _hasScrolled();
+                    didScroll = false;
+                }
+            }, 250);
         },
 
         _setSearchVal: function(searchVal) {

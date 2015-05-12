@@ -152,7 +152,7 @@ define(function(require) {
 
         _scrollToResults: function() {
             $(('html,body')).animate({
-                scrollTop: '200'
+                scrollTop: '90'
             }, 750);
         }
     });
