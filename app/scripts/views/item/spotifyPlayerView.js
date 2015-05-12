@@ -57,7 +57,7 @@ define(function(require) {
         ui: {
             'iframeContainer': '.iframe-container',
             'iframe': 'iframe',
-            'toggle': '.spotify-player-toggle'
+            'toggle': 'button.spotify-player-toggle'
         },
 
         events: {
@@ -71,6 +71,10 @@ define(function(require) {
             'change:view': 'render',
             'change:data': 'render',
             'change:playlistReady': '_onChangePlaylistReady'
+        },
+
+        onRender: function() {
+            this._preventButtonFocus();
         },
 
         _onChangePlaylistReady: function(model, ready){
@@ -92,6 +96,14 @@ define(function(require) {
             this.ui.iframe.height(expandedHeight);
             this.ui.toggle.text('Hide');
             this.model.set('isExpanded', true);
-        }
+        },
+
+        //  http://stackoverflow.com/questions/23443579/how-to-stop-buttons-from-staying-depressed-with-bootstrap-3
+        //  This stops the button from staying focused, which causes style issues
+        _preventButtonFocus: function() {
+            this.ui.toggle.mouseup(function(){
+                $(this).blur();
+            });
+        },
     });
 });
