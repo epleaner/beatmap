@@ -28,6 +28,7 @@ define(function(require) {
 
         /* Ui events hash */
         events: {
+            'click @ui.searchInput': '_centerSearchInput',
             'click @ui.searchButton': '_triggerSearch'
         },
 
@@ -39,6 +40,12 @@ define(function(require) {
         onRender: function() {
             this._setupEnterKey();
             this._preventButtonFocus();
+        },
+
+        _centerSearchInput: function() {
+            $(('html,body')).animate({
+                scrollTop: '75'
+            }, 250);
         },
 
         _triggerSearch: function() {
