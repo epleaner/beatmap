@@ -19,6 +19,11 @@ define(function(){
 			spotifyLogin: {
 				
 			}
+		},
+
+		splash: {
+			mainTag: 'All your favorite music services, rolled up in one.',
+			secondTag: 'Recommendations from last.fm + listening through Spotify, Youtube, and more = Beatmap'
 		}
 	};
 
