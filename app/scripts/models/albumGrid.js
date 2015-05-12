@@ -20,7 +20,8 @@ define(function(require) {
                 albumResults: false,
                 searchLoading: false,
                 noResults: false,
-                searchComplete: false
+                searchComplete: false,
+                playlistLength: 50
             };
         },
 
@@ -109,11 +110,11 @@ define(function(require) {
                 function () { 
                     allTracks = _.flatten(allTracks);
                     var shuffledTrackIds = _.shuffle(allTracks);
-                    var fewTracksIds = _.first(shuffledTrackIds, 25);
+                    var fewTracksIds = _.first(shuffledTrackIds, this.get('playlistLength'));
                     var joinedTrackIds = _.pluck(fewTracksIds, 'id').join(',');
 
                     Beatmap.channels.albumGrid.vent.trigger('playlistReady', joinedTrackIds);
-                }
+                }.bind(this)
             );
 
         },

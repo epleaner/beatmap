@@ -4,14 +4,15 @@
 body {
 	color: #555555;
 }
+
 //	Give all link tags a smooth hover color transition
 a {
     @include hover-transition;
     color: #555555;
 }
-//	Make all link tags be same color on hover
+//  Make all link tags be same color on hover
 a:hover {
-    color:$link-hover-color !important;
+    color:$link-hover-color;
 }
 
 img {
@@ -60,6 +61,10 @@ img {
             a {
             	//	Make link same color as other text in footer
                 color: #434A54;
+
+                &:hover {
+                    color:$link-hover-color !important;
+                }
             }
             @include hover-transition;
             padding: 0px 5px;

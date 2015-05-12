@@ -4,7 +4,7 @@ define(function(require) {
     var NavBarTemplate = require('text!tmpl/item/navBar_tmpl.html');
 
     var HelpModal = require('views/item/dialogs/helpModal');
-    var SpotifyLoginModal = require('views/item/dialogs/spotifyLoginModal');
+    // var SpotifyLoginModal = require('views/item/dialogs/spotifyLoginModal');
 
     var NavBar = Backbone.Model.extend({
         defaults: {
@@ -28,16 +28,17 @@ define(function(require) {
         ui: {
             search: '.navbar-search',
             help: '.navbar-help',
-            spotifyLogin: '.spotify-login',
             collapseToggle: '.navbar-toggle',
             collapse: '.navbar-collapse',
+            // spotifyLogin: '.spotify-login',
             // lastfmLogin: '.lastfm-login'
         },
 
         events: {
             'click @ui.help': '_openHelpModal',
-            'click @ui.spotifyLogin': '_openSpotifyLoginModal',
-            'click @ui.collapseToggle': '_toggleCollapse'
+            'click @ui.collapseToggle': '_toggleCollapse',
+            // 'click @ui.spotifyLogin': '_openSpotifyLoginModal',
+
         },
 
         modelEvents: {
@@ -84,6 +85,9 @@ define(function(require) {
           }.bind(this));
         },
 
+        //  Hides header and footer on scroll down, shows them on scroll up.
+        //  Taken from https://medium.com/@mariusc23/hide-header-on-scroll-down-show-on-scroll-up-67bbaae9a78c
+        //  TODO: this logic should be cleaned up
         _setupHideScrollEvent: function() {
             var didScroll;
             var lastScrollTop = 0;
@@ -143,11 +147,11 @@ define(function(require) {
             this.getRegion('dialogs').show(new HelpModal());
         },
 
-        _openSpotifyLoginModal: function(event) {
-            event.preventDefault();
+        // _openSpotifyLoginModal: function(event) {
+        //     event.preventDefault();
 
-            this.getRegion('dialogs').show(new SpotifyLoginModal());
-        },
+        //     this.getRegion('dialogs').show(new SpotifyLoginModal());
+        // },
 
         _toggleCollapse: function() {
             this.ui.collapse.is(':visible') ? 
