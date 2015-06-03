@@ -165,10 +165,23 @@ footer:hover {
 	}
 }
 
+.album-container {
+    .details {
+        .tracks {
+            overflow-y: auto;
+        }
+        width: 100%;
+    }
+}
+
 //  Controls modal dialog transitions
 .modal.fade:not(.in) {
  	.modal-dialog.slide-bottom {
 	    -webkit-transform: translate3d(0, 125%, 0);
 	    transform: translate3d(0, 125%, 0);
 	}
+}
+
+.social-icon-disabled {
+    fill: #BEBEBE;
 }
