@@ -46,7 +46,7 @@
     .grid figure figcaption::before, .grid figure figcaption::after {
         pointer-events: none;
     }
-    .grid figure figcaption, .grid figure figcaption > a {
+    .grid figure figcaption, .grid figure figcaption > span {
         position: absolute;
         top: 0;
         left: 0;
@@ -56,7 +56,7 @@
     /* Anchor will cover the whole item by default */
     /* For some effects it will show as a button */
     
-    .grid figure figcaption > a {
+    .grid figure figcaption > span {
         z-index: 1000;
         text-indent: 200%;
         white-space: nowrap;
@@ -88,9 +88,11 @@
     }
     .grid figure .icon-links .social-icon {
         width: 20px;
-        @include hover-transition;
+        &:not(.social-icon-disabled) {
+            @include hover-transition;
+        }
     }
-    .grid figure .icon-links .social-icon:hover {
+    .grid figure .icon-links .social-icon:not(.social-icon-disabled):hover {
         width: 20px;
         fill: $link-hover-color;
     }
@@ -130,12 +132,12 @@
     figure.effect-zoe h5 {
         float: left;
     }
-    figure.effect-zoe p.icon-links a {
+    figure.effect-zoe p.icon-links span {
         float: right;
         color: #3c4a50;
         font-size: 1.4em;
     }
-    figure.effect-zoe:hover p.icon-links a:hover, figure.effect-zoe:hover p.icon-links a:focus {
+    figure.effect-zoe:hover p.icon-links span:hover, figure.effect-zoe:hover p.icon-links span:focus {
         color: #9DA7FF;
         cursor: pointer;
     }
@@ -156,7 +158,7 @@
         -webkit-backface-visibility: hidden;
         /* Fix for Chrome 37.0.2062.120 (Mac) */
     }
-    figure.effect-zoe h5, figure.effect-zoe p.icon-links a {
+    figure.effect-zoe h5, figure.effect-zoe p.icon-links span.social-icon-container {
         -webkit-transition: -webkit-transform 0.35s;
         transition: transform 0.35s;
         -webkit-transform: translate3d(0, 200%, 0);
@@ -170,7 +172,7 @@
         transform: translate3d(0, 100%, 0);
     }
 
-    figure.effect-zoe p.icon-links a span::before {
+    figure.effect-zoe p.icon-links span span::before {
         display: inline-block;
         padding: 8px 10px;
         font-family: 'socialglyphs';
@@ -193,7 +195,7 @@
     figure.effect-zoe:hover p.description {
         opacity: 1;
     }
-    figure.effect-zoe:hover figcaption, figure.effect-zoe:hover h5, figure.effect-zoe:hover p.icon-links a {
+    figure.effect-zoe:hover figcaption, figure.effect-zoe:hover h5, figure.effect-zoe:hover p.icon-links span.social-icon-container {
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
     }
@@ -206,15 +208,15 @@
         -webkit-transition-delay: 0.05s;
         transition-delay: 0.05s;
     }
-    figure.effect-zoe:hover p.icon-links a:nth-child(3) {
+    figure.effect-zoe:hover p.icon-links span.social-icon-container:nth-child(3) {
         -webkit-transition-delay: 0.1s;
         transition-delay: 0.1s;
     }
-    figure.effect-zoe:hover p.icon-links a:nth-child(2) {
+    figure.effect-zoe:hover p.icon-links span.social-icon-container:nth-child(2) {
         -webkit-transition-delay: 0.15s;
         transition-delay: 0.15s;
     }
-    figure.effect-zoe:hover p.icon-links a:first-child {
+    figure.effect-zoe:hover p.icon-links span.social-icon-container:first-child {
         -webkit-transition-delay: 0.2s;
         transition-delay: 0.2s;
     }

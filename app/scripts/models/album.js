@@ -7,7 +7,6 @@ define(function(require) {
     var defaultLastfmAlbumArtwork = 'http://cdn.last.fm/flatness/catalogue/noimage/2/default_album_medium.png';
     var defaultLocalAlbumArtwork = 'images/logo.png';
     var youtubeSearchBase = 'https://www.youtube.com/results?search_query=';
-    var groovesharkSearchBase = 'http://grooveshark.com/#!/search/album?q=';
 
     /* Return a model class definition */
     return Backbone.Model.extend({
@@ -27,7 +26,6 @@ define(function(require) {
             toptags: [],
             name: 'Album name unknown',
             youtubeLink: 'http://www.youtube.com',
-            groovesharkLink: 'http://www.grooveshark.com',
             spotifyURL: 'http://www.spotify.com',
             spotifyID: '',
             spotifyImages: [],
@@ -154,7 +152,6 @@ define(function(require) {
             searchString = encodeURIComponent(searchString);
 
             this.set('youtubeLink', youtubeSearchBase + searchString + '+full+album');
-            this.set('groovesharkLink', groovesharkSearchBase + searchString);
         },
 
         _onError: function(response) {
