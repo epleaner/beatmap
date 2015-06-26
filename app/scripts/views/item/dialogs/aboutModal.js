@@ -5,7 +5,7 @@ define(function(require) {
     var AboutModal = Backbone.Marionette.ItemView.extend({
         template: _.template(AboutModalTemplate),
         ui: {
-            modal: '#about-modal',
+            modal: '.about-modal',
         },
 
         onShow: function() {

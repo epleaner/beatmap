@@ -185,3 +185,11 @@ footer:hover {
 .social-icon-disabled {
     fill: #BEBEBE;
 }
+
+.about-modal {
+    .modal-body {
+        a {
+            color: $link-hover-color;
+        }
+    }
+}
