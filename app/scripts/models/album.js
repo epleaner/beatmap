@@ -61,6 +61,11 @@ define(function(require) {
             this.set('spotifyURI', spotifyAlbum.attributes.uri);
         },
 
+        quickSearch: function() {
+            var urlSearch = this.get('artist').name.split(' ').join('+');
+            Beatmap.router.navigate('#search/' + urlSearch, { trigger: true });
+        },
+
         _onGetInfoSuccess: function(response) {
             //  album already has an artist object property
             //  that has more than what the response gives,

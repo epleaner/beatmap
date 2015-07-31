@@ -7,7 +7,6 @@ define(function() {
 		},
 		_doSearch: function(query) {
 			query = query.split('+').join(' ');
-			console.log('navigated to search with query', query);
 			Beatmap.channels.router.vent.trigger('search', query);
 		},
 		_showAboutPage: function() {
