@@ -136,7 +136,7 @@ define(function(require) {
                     size: 'extralarge'
                 }).shift()['#text'];
 
-                if (artworkUrl === defaultLastfmAlbumArtwork) {
+                if (_.isEmpty(artworkUrl) || artworkUrl === defaultLastfmAlbumArtwork) {
                     artworkUrl = defaultLocalAlbumArtwork;
                 }
 
