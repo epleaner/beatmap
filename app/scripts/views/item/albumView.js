@@ -32,6 +32,7 @@ define(function(require) {
 
 		/* on render callback */
 		onRender: function() {
+      debugger;
 			this._stopPropagation();
 		},
 

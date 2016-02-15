@@ -74,7 +74,7 @@
     .grid figure h5 {
         font-size: 1em;
         font-weight: normal;
-        margin-right: 60px;
+        margin-right: 80px;
         margin-top: -5px;
     }
     .grid figure p {
@@ -87,6 +87,7 @@
         right: 1em;
     }
     .grid figure .icon-links .social-icon {
+        margin: 0px 5px;
         width: 20px;
         &:not(.social-icon-disabled) {
             @include hover-transition;
