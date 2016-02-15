@@ -37,7 +37,7 @@
                     </span>
                 </p>
                 <div class="details">
-                    <h6>Released: <%= releasedate %></h6>
+                    <h6>Released: <% if(releasedate === '') %> Unavailable <% else %> <%= releasedate %></h6>
                     <% if(toptags.length > 0) { %>
                     <h6>Tags: 
                         <% _.each(toptags, function(tag) { %>
@@ -45,8 +45,8 @@
                         <% }) %>
                     </h6>
                     <% } %>
-                    <% if(tracks.length > 0) { %>
-                    <h6 class="tracks">Tracks:
+                    <h6 class="tracks">Tracklist:
+                        <% if(tracks.length > 0) { %>
                         <ol>
                             <% _.each(tracks, function(track) { %>
                             <li>
@@ -54,8 +54,8 @@
                             </li>
                             <% }) %>
                         </ol>
+                        <% } else %> Unavailable 
                     </h6>
-                    <% } %>
                 </div>
             </figcaption>
     </figure>

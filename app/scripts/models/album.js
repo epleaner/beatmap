@@ -21,7 +21,7 @@ define(function(require) {
             artist: {
                 name: 'Artist name unknown'
             },
-            releasedate: 'Unknown',
+            releasedate: 'Unavailable',
             tracks: [],
             toptags: [],
             name: 'Album name unknown',
@@ -94,7 +94,7 @@ define(function(require) {
         _formatReleaseDate: function() {
             var date = this.attributes.releasedate;
             if (date.trim() === '') {
-                date = 'unknown';
+                date = 'Unavailable';
             } else {
                 date = date.substring(0, date.indexOf(',')).trim();
             }
