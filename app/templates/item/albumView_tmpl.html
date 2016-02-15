@@ -45,7 +45,8 @@
                     </span>
                 </p>
                 <div class="details">
-                    <h6>Released: <% if(releasedate === '') %> Unavailable <% else %> <%= releasedate %></h6>
+                    <h6><%= listeners %> Listeners  |   <%= playcount %> Plays</h6>
+                    <% if(releasedate.length > 0) { %><h6>Released: <%= releasedate %></h6><% } %>
                     <% if(toptags.length > 0) { %>
                     <h6>Tags: 
                         <% _.each(toptags, function(tag) { %>

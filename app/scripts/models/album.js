@@ -21,6 +21,8 @@ define(function(require) {
             artist: {
                 name: 'Artist name unknown'
             },
+            playcount: 'Unavailable',
+            listeners: 'Unavailable',
             releasedate: 'Unavailable',
             tracks: [],
             toptags: [],
