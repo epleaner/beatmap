@@ -1,0 +1,1 @@
+define(["require","text!tmpl/item/dialogs/spotifyLoginModal_tmpl.html"],function(e){"use strict";var t=e("text!tmpl/item/dialogs/spotifyLoginModal_tmpl.html"),n=Backbone.Marionette.ItemView.extend({template:_.template(t),ui:{modal:"#spotify-login-modal"},onShow:function(){this.ui.modal.modal()}});return n});

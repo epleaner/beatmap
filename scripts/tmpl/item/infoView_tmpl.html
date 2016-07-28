@@ -1,0 +1,32 @@
+<div class="row search-description-container">
+	
+	<% if(searchLoading) { %>
+	<h3 class="text-center">
+		Searching...
+	</h3>
+	<% } else if(searchComplete && !noResults) { %>
+
+	<h3 class="search-results-description text-center">
+		Showing recommendations based on <% if(albumResults) { %>
+		the album "<span class="text-capitalize"><%= searchAlbum.get('name') %></span>" by <span class="text-capitalize"><%= searchArtist.get('name') %></span>
+		<% } else { %>
+		the artist "<span class="text-capitalize"><%= searchArtist.get('name') %><span class="text-capitalize">"
+		<% } %>
+	</h3>
+
+	<% } else if(!noResults) { %>
+	
+		<h3 class="text-center lead-text">All your favorite music services, rolled up in one.</h3>
+		<h4 class="text-center">Recommendations from <a href="http://last.fm" target="_blank">Last.fm</a></h4>
+		<h4 class="text-center">+</h4>
+		<h4 class="text-center">
+			Streaming through <a href="http://spotify.com" target="_blank">Spotify</a>, 
+			<a href="http://youtube.com" target="_blank">YouTube</a>, and more
+			<!-- <a href="http://streamus.com" target="_blank">Streamus</a> -->
+		</h4>
+		<h4 class="text-center">=</h4>
+		<h4 class="text-center"><img src="images/logo.png" width="100px"></h4>
+	<% } %>
+
+</div>
+

@@ -1,0 +1,4 @@
+<div class="spotify-player-container <%= isHidden() %>">
+	<button type="button" class="btn btn-primary btn-small spotify-player-toggle hover-opacity"><%= getButtonLabel() %></button>
+	<iframe class="spotify-player-iframe hover-opacity" src="<%- getSrc() %>" width="<%= getWidth() %>" height="<%= getHeight() %>" frameborder="0" allowtransparency="true"></iframe>
+</div>

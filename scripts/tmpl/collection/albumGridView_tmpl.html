@@ -1,0 +1,12 @@
+<% if(searchComplete && !noResults) { %>
+<div class="row search-buttons-container text-center">
+	<!-- Hide the create playlist button if on small screen, sorry :/ -->
+	<div class="create-playlist-container hidden-sm hidden-xs">
+		<button type="button" class="btn btn-default create-playlist-button">
+				Create Spotify playlist from recommendations
+		</button>
+	</div>
+</div>
+<% } %>
+
+<div class="row search-results"></div>
